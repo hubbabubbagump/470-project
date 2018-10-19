@@ -1,3 +1,8 @@
 # 470-project
 
 A web application designed to facilitate the trading of school materials such as textbooks.
+
+To  run:
+    1. Install PHP on your system (http://php.net/downloads.php)
+    2. If on Windows, add the PHP installation directory to PATH
+    3. Run 'php -S localhost:<port>' to run the server
