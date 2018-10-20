@@ -1,6 +1,7 @@
 # 470-project
 
 A web application designed to facilitate the trading of school materials such as textbooks.
+Needs PHP to run https://windows.php.net/download#php-7.2
 
 To  run:
 1. Clone/download the repo.
