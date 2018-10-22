@@ -22,7 +22,7 @@
             '_id' => $id,
             'isAdmin' => $isAdmin
         ]);
-        echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
+        echo "[" . $collection->getCollectionName() . "] Inserted new user with id: " . $result->getInsertedId() . "\n"; 
     }
 
     function addAdminUser ($collection) {
