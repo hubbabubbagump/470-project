@@ -1,12 +1,13 @@
 <?php
 
     include_once __DIR__ . "/../database/userManagement.php";
+    include_once __DIR__ . "/../database/settings.php";
 
     function addAdminUser ($collection) {
         insertUser($collection, 'Admin', 'admin@admin.ca', 'password', True);
     }
 
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client(getDBAddr());
 
     try {
         $local = $mongo->local;

@@ -1,8 +1,9 @@
 <?php
 
     include_once __DIR__ . "/../database/itemManagement.php";
+    include_once __DIR__ . "/../database/settings.php";
 
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client(getDBAddr());
 
     try {
         $local = $mongo->local;

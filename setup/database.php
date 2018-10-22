@@ -1,9 +1,10 @@
 <?php
     require_once __DIR__ . '/../vendor/autoload.php';
+    include_once __DIR__ . "/../database/settings.php";
 
     //https://www.mongodb.com/download-center?jmp=docs#production
     //https://docs.mongodb.com/php-library/v1.2/reference/class/MongoDBClient/
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client(getDBAddr());
     echo "Connected to MongoDB Client on port 27017\n";
 
     try {
