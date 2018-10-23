@@ -1,7 +1,7 @@
 <?php
 
-    include_once __DIR__ . "/../database/userManagement.php";
-    include_once __DIR__ . "/../database/settings.php";
+    include_once __DIR__ . "/../application/database/userManagement.php";
+    include_once __DIR__ . "/../application/database/settings.php";
 
     function addAdminUser ($collection) {
         insertUser($collection, 'Admin', 'admin@admin.ca', 'password', True);

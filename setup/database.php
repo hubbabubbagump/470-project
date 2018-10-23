@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__ . '/../vendor/autoload.php';
-    include_once __DIR__ . "/../database/settings.php";
+    require_once __DIR__ . '/../application/vendor/autoload.php';
+    include_once __DIR__ . "/../application/database/settings.php";
 
     //https://www.mongodb.com/download-center?jmp=docs#production
     //https://docs.mongodb.com/php-library/v1.2/reference/class/MongoDBClient/

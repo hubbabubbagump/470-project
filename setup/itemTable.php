@@ -1,7 +1,7 @@
 <?php
 
-    include_once __DIR__ . "/../database/itemManagement.php";
-    include_once __DIR__ . "/../database/settings.php";
+    include_once __DIR__ . "/../application/database/itemManagement.php";
+    include_once __DIR__ . "/../application/database/settings.php";
 
     $mongo = new MongoDB\Client(getDBAddr());
 
