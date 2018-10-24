@@ -63,6 +63,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
 	}
+
+	#loginForm {
+		text-align: center;
+		margin: auto;
+		width: 50%;
+		border: solid #D0D0D0;
+		padding: 14px 15px 15px 15px;
+	}
 	</style>
 </head>
 <body>
@@ -71,7 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+		<p>This is the welcome page for the CMPT 470 Project</p>
+		<p>This project will become a market place for students to trade items</p>
+
 
 		<p>If you would like to edit this page you'll find it located at:</p>
 		<code>application/views/welcome_message.php</code>
@@ -83,6 +93,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<form method="post" action="register/">
 			<input type="submit" name="register" value="Register"/>
 		</form>
+	</div>
+
+  <div id="loginForm">
+		<h1>Please Login</h1>
+
+		<label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
