@@ -6,6 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
+	<script type='text/javascript' src="/js/header.js"></script>
+	<link rel="stylesheet" href="/css/header.css">
+
 	<style type="text/css">
 
 	::selection { background-color: #E13300; color: white; }
@@ -13,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	body {
 		background-color: #fff;
-		margin: 40px;
+		margin: 0;
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: #4F5155;
 	}
@@ -76,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<h1>Welcome to 470 Project!</h1>
 
 	<div id="body">
 		<p>This is the welcome page for the CMPT 470 Project</p>
@@ -90,23 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<code>application/controllers/Welcome.php</code>
 
 		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-		<form method="post" action="register/">
-			<input type="submit" name="register" value="Register"/>
-		</form>
 	</div>
-
-  <div id="loginForm">
-		<h1>Please Login</h1>
-
-		<label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
-
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-
-    <button type="submit">Login</button>
-	</div>
-
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 

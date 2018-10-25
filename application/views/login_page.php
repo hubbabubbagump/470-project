@@ -3,28 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html>
     <head>
-        <title>Register</title>
-        <script type='text/javascript' src="/js/registration.js"></script>
+        <title>Login</title>
+        <meta charset="UTF-8" />
+
+        <script type='text/javascript' src="/js/login.js"></script>
         <script type='text/javascript' src="/js/header.js"></script>
-        <link rel="stylesheet" href="/css/login.css">
         <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/login.css">
     </head>
 
     <body>
-        <h1>Register</h1>
+        <h1>Login</h1>
         <div class="container">
-            <div class="signin">
+            <div class="signin">  
                 <?php
                     echo validation_errors(); 
                 ?>
-                <form method="post" action="register/create" onsubmit="return checkSubmit()" name="registrationForm">
-                    <p>
-                        <label><b>Name</b></label>
-                        <br>
-                        <input type="text" name="name" placeholder="Enter Name"/>
-                        <br>
-                    </p> 
-
+                <form method="post" action="login/login" onsubmit="return checkSubmit()" name="loginForm">
                     <p>
                         <label><b>Email</b></label>
                         <br>
@@ -41,8 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <p id="error"></p>
 
-                    <input class="button" type="submit" value="Register"/>            
+                    <input class="button" type="submit" value="Login"/>            
                 </form>
+
             </div>
         </div>
+
     </body>
