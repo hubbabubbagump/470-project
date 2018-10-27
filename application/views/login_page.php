@@ -6,24 +6,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <title>Login</title>
         <meta charset="UTF-8" />
 
-        <script type='text/javascript' src="/js/login.js"></script>
-        <script type='text/javascript' src="/js/header.js"></script>
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/login.css">
+        
     </head>
 
     <body>
         <h1>Login</h1>
-        <div class="container">
+        <div class="loginContainer">
             <div class="signin">  
                 <?php
                     echo validation_errors(); 
                 ?>
-                <form method="post" action="login/login" onsubmit="return checkSubmit()" name="loginForm">
+                <form name="loginForm" onsubmit="event.preventDefault(); return checkSubmit()">
                     <p>
                         <label><b>Email</b></label>
                         <br>
-                        <input type="email" name="email" placeholder="Enter Email"/>
+                        <input id="email" type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
                         <br>
                     </p>
 
@@ -41,5 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             </div>
         </div>
-
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script type='text/javascript' src="/js/login.js"></script>
+        <script type='text/javascript' src="/js/header.js"></script>
     </body>
+</html>

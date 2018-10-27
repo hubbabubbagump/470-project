@@ -1,15 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="/css/login.css">
-</head>
 <body>
     <div class="header">
-        <label onclick="openHome()">470 Project</label>
+        <div class="labelContainer"><label onclick="openHome()">470 Project</label></div>  
         <div class="loginregister">
-            <button class="navigate" id="login" onclick="openLogin()" type="submit">Login</button>
-            <button class="navigate"id="register" onclick="openRegister()">Register</button>
+        <?php if ($showLogin): ?>
+            <div class="buttonContainer" onclick="openLogin()"><p class="navigate login" id="login">Login</p></div>
+            <div class="buttonContainer" onclick="openRegister()"><p class="navigate register"id="register">Register</p></div>
+        <?php else: ?>
+            <div class="buttonContainer" onclick="openLogout()"><button class="navigate" id="logout">Logout</button></div>
+        <?php endif; ?>
         </div>
     </div>
-</body>  
+</body>

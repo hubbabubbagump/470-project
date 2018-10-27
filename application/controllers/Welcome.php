@@ -18,9 +18,20 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	private $showLogin = TRUE;
+
 	public function index()
 	{
-		$this->load->view('header');
+		session_start();
+
+		if (isset($_SESSION['user_id'])) {
+            $this->showLogin = FALSE;
+		}
+
+		$headerData['showLogin'] = $this->showLogin;
+		$test = $this->showLogin;
+		$this->load->view('header', $headerData);
 		$this->load->view('welcome_message');
 	}
 }

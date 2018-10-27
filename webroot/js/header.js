@@ -11,3 +11,7 @@ function openRegister() {
 function openHome() {
     window.location.href = "/"
 }
+
+function openLogout() {
+    window.location.href = "/logout";
+}

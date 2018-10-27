@@ -4,31 +4,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
         <title>Register</title>
-        <script type='text/javascript' src="/js/registration.js"></script>
-        <script type='text/javascript' src="/js/header.js"></script>
+        <meta charset="UTF-8" />
+        
         <link rel="stylesheet" href="/css/login.css">
         <link rel="stylesheet" href="/css/header.css">
     </head>
 
     <body>
         <h1>Register</h1>
-        <div class="container">
+        <div class="loginContainer">
             <div class="signin">
                 <?php
                     echo validation_errors(); 
                 ?>
-                <form method="post" action="register/create" onsubmit="return checkSubmit()" name="registrationForm">
+                <form onsubmit="event.preventDefault(); return checkSubmit()" name="registrationForm">
                     <p>
                         <label><b>Name</b></label>
                         <br>
-                        <input type="text" name="name" placeholder="Enter Name"/>
+                        <input type="text" name="name" placeholder="Enter Name" value="<?php echo $name; ?>"/>
                         <br>
                     </p> 
 
                     <p>
                         <label><b>Email</b></label>
                         <br>
-                        <input type="email" name="email" placeholder="Enter Email"/>
+                        <input type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
                         <br>
                     </p>
 
@@ -45,4 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </form>
             </div>
         </div>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script type='text/javascript' src="/js/registration.js"></script>
+        <script type='text/javascript' src="/js/header.js"></script>
     </body>
+</html>
