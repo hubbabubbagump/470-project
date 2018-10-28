@@ -36,7 +36,7 @@ function checkSubmit() {
 
     request.done(function (response, textStatus, jqXHR) {
         window.location.href = "/";
-    })
+    });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
         console.error("Error: " + textStatus, errorThrown);
