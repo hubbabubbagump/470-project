@@ -2,12 +2,13 @@
     function getDBAddr() {
         $localAddress = "localhost";
         $productionAddress = "192.169.23.65";
+        $internalMongo = "10.142.0.3";
         $port = 27017;
-    
-        $useProduction = False;    
+
+        $useProduction = true;
 
         if ($useProduction) {
-            $address = "mongodb://" . $productionAddress . ":" . $port;
+            $address = "mongodb://" . $internalMongo . ":" . $port;
             return $address;
         }
         else {
