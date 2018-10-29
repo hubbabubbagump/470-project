@@ -31,7 +31,7 @@ class Login extends CI_Controller {
     public function index() {
 
     }
-    
+
     public function login() {
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required');
