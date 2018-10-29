@@ -17,8 +17,22 @@ Setup:
 6. Add the 'bin' folder inside the MongoDB install location to PATH.
 7. Inside /application AND /webroot, run "composer install"
 
+To Run on Google Cloud Platform:
+1. Start the VM called "instance-1"
+2. Start the VM called "mongodb"
+
+DevOps Info:
+instance-1 is running the website through Windows IIS
+The website files are located in "C:\Program Files\470-project-master"
+mongodb is running a Mongodb Service
+The database files are located in "C:\data\db"
+Please contact Matthew if database changes need to be made
+Both VM's should automatically start their respective parts, so there is no need to enter any commands.
+The website connects to the internal IP, so the external IP should not matter.
+Currently, the gcp firewall allows internal connections on port 27017
+
+
 <br>
 Adding scripts to setup the web application (e.g. adding database scripts):
 - Add the .php script to the 'setup' folder and include the file in 'setup.php'.
 - The script can be loaded by running 'php \<scriptname\>' without having to reinitialize the web application. Otherwise, run 'setup.php' to load the script.
-
