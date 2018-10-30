@@ -17,5 +17,5 @@ function openLogout() {
 }
 
 function openPostItem() {
-	window.location.href = "/addItem";
+	window.location.href = "/Item";
 }

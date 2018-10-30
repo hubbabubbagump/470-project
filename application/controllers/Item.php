@@ -5,26 +5,34 @@
 		public function __construct()
 		{
 			parent::__construct();
+			//session_start();
+
+
 			$this->load->model('item_model');
 
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 			$this->load->helper('url');
 			// load view of form?
-			//$this->load->view('add_item_page')
+			$this->load->view('header', FALSE);
+			$this->load->view('add_item_page');
 		}
+		   public function index() {
+
+    }
+    
 
 		public function create()
 		{
 			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('sellerID', 'Seller ID', 'required');
 			$this->form_validation->set_rules('price', 'Price', 'decimal');
-			$data['title'] = "Add a new item to sell";
+			//$data['title'] = "Add a new item to sell";
 
 			if ($this->form_validation->run() === FALSE)
 			{
-				$this->load->view('header', $data); //which header?
-				$this->load->view('add_item'); 
+				$this->load->view('header', FALSE); //which header?
+				$this->load->view('add_item_page');//, $data); 
 			}
 			else
 			{

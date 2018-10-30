@@ -11,7 +11,7 @@
             'desc' => $desc,
             'datePosted' => $timestamp,
             '_id' => $id,
-            'seller' => $sellerID
+            'seller' => $sellerID,
             'price' => $price
         ]);
         echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 

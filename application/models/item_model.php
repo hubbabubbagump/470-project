@@ -22,7 +22,7 @@
     		// need to check that all values ara valid?- should be done in controller
 
     		// need to create a new db client? confirm on discord
-    		// $database = new MongoDB\Client(getDBAddr());
+    		$database = new MongoDB\Client(getDBAddr());
 
     		addItem(
     			 $database->local->saleItems
