@@ -5,17 +5,21 @@
 		public function __construct()
 		{
 			parent::__construct();
-			//session_start();
+			session_start();
 
+			if(isset($_SESSION['user_id'])) {
+				$headerData['showLogin'] = FALSE;
+				$this->load->model('item_model');
 
-			$this->load->model('item_model');
+				$this->load->helper('form');
+				$this->load->library('form_validation');
+				$this->load->helper('url');
+				// load view of form
 
-			$this->load->helper('form');
-			$this->load->library('form_validation');
-			$this->load->helper('url');
-			// load view of form
-			$this->load->view('header', FALSE);
-			$this->load->view('add_item_page');
+				$this->load->view('header', $headerData);
+				$this->load->view('add_item_page');
+		}
+
 		}
 		   public function index() {
 
@@ -33,12 +37,15 @@
 			{
 				echo "form validation failed";
 				echo "title: ".$title;
-				$this->load->view('header', FALSE); //which header?
+
+				$headerData['showLogin'] = FALSE;
+				$this->load->view('header', $headerData); //which header?
 				$this->load->view('add_item_page');//, $data); 
 			}
 			else
-			{
-				$this->item_model->addItem();
+			{	
+				$sellerID = $_SESSION['user_id'];
+				$this->item_model->addItem($sellerID);
 				//echo 'Successfully added new item';
 				//$this->item_model->getItemSummary();
 				$this->load->view('add_item_success_page', $data);

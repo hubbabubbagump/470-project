@@ -14,10 +14,10 @@
     		parent::__construct();
     	}
 
-    	public function addItem()
+    	public function addItem($sellerID)
     	{
     		$this->load->helper('url');
-    		$slug = url_title($this->input->post('title'), 'dash', TRUE);
+    		//$slug = url_title($this->input->post('title'), 'dash', TRUE);
 
     		// need to check that all values ara valid?- should be done in controller
 
@@ -27,7 +27,7 @@
     		addItem(
     			 $database->local->saleItems
     			,$this->input->post('title')
-    			,$this->input->post('sellerID')
+    			,$sellerID
     			,$this->input->post('faculty')
     			,$this->input->post('courseNum')
     			,$this->input->post('desc')
