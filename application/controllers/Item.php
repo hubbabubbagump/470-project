@@ -13,7 +13,7 @@
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 			$this->load->helper('url');
-			// load view of form?
+			// load view of form
 			$this->load->view('header', FALSE);
 			$this->load->view('add_item_page');
 		}
@@ -27,18 +27,21 @@
 			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('sellerID', 'Seller ID', 'required');
 			$this->form_validation->set_rules('price', 'Price', 'decimal');
-			//$data['title'] = "Add a new item to sell";
+			$data['title'] =  $item_model->input->post('title');// "Add a new item to sell";
 
 			if ($this->form_validation->run() === FALSE)
 			{
+				echo "form validation failed";
+				echo "title: ".$title;
 				$this->load->view('header', FALSE); //which header?
 				$this->load->view('add_item_page');//, $data); 
 			}
 			else
 			{
 				$this->item_model->addItem();
-				echo 'Successfully added new item';
-				$this->item_model->getItemSummary();
+				//echo 'Successfully added new item';
+				//$this->item_model->getItemSummary();
+				$this->load->view('add_item_success_page', $data);
 			}
 		}
 	}

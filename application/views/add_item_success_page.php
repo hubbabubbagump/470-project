@@ -1,0 +1,1 @@
+<h1>Success! Added new post <?php echo $title; ?></h1>
