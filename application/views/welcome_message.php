@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>Welcome to CodeIgniter</title>
 
 	<script type='text/javascript' src="/js/header.js"></script>
-	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/header.css" />
 
 	<style type="text/css">
 

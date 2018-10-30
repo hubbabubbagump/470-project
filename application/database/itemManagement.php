@@ -1,5 +1,6 @@
 <?php
-    function addItem ($collection, $title, $sellerID, $faculty, $courseNum, $desc) {
+    function addItem ($collection, $title, $sellerID, $faculty, $courseNum, $desc, $price) {
+
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
         $id = uniqid();
@@ -11,6 +12,7 @@
             'datePosted' => $timestamp,
             '_id' => $id,
             'seller' => $sellerID
+            'price' => $price
         ]);
         echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
     }

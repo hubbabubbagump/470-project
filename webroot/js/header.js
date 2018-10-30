@@ -9,9 +9,13 @@ function openRegister() {
 }
 
 function openHome() {
-    window.location.href = "/"
+    window.location.href = "/";
 }
 
 function openLogout() {
     window.location.href = "/logout";
+}
+
+function openPostItem() {
+	window.location.href = "/addItem";
 }
