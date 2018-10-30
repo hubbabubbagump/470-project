@@ -16,4 +16,11 @@
         ]);
         echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
     }
+
+    function getItemsByCourseNum($collection, $courseNum) {
+        $cursor = $collection->find(['courseNum' => $courseNum]);
+        $items = $cursor->toArray();
+
+        return $items;
+    }
 ?>

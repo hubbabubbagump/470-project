@@ -6,6 +6,7 @@
         $port = 27017;
 
         $useProduction = true;
+        //$useProduction = false;
 
         if ($useProduction) {
             $address = "mongodb://" . $internalMongo . ":" . $port;

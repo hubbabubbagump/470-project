@@ -12,9 +12,13 @@
         echo $e;
     }
 
-    //Create collection for items that people are selling
+    // Create collection for items that people are selling
     $local->createCollection("saleItems");
     $saleItems = $local->saleItems;
     echo "[" . $local->getDatabaseName() . "] Created new collection: " . $saleItems->getCollectionName() . "\n";
-    addItem($saleItems, "An example textbook", "5345ds3iaf", "CMPT", 470, "Slightly used textbook in good condition", 50);
+
+    // Add some test data
+    for ($i = 0; $i < 5; $i++) {
+        addItem($saleItems, "Example Textbook " . $i, "exampleID" . $i, "CMPT", 470, "Slightly used textbook in good condition", 1);
+    }
 ?>
