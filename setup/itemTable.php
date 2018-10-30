@@ -16,5 +16,5 @@
     $local->createCollection("saleItems");
     $saleItems = $local->saleItems;
     echo "[" . $local->getDatabaseName() . "] Created new collection: " . $saleItems->getCollectionName() . "\n";
-    addItem($saleItems, "An example textbook", "5345ds3iaf", "CMPT", 470, "Slightly used textbook in good condition");
+    addItem($saleItems, "An example textbook", "5345ds3iaf", "CMPT", 470, "Slightly used textbook in good condition", 50);
 ?>
