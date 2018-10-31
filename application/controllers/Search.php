@@ -17,6 +17,7 @@ class Search extends CI_Controller {
 		}
 
 		$headerData['showLogin'] = $this->showLogin;
+		$headerData['showPostItem'] = FALSE;
 		$data['title'] = ucfirst($page);
 
 		$this->load->view('header', $headerData);

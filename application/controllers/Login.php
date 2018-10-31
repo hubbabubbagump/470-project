@@ -15,6 +15,7 @@ class Login extends CI_Controller {
             $email = "";
 
             $headerData['showLogin'] = $this->showLogin;
+            $headerData['showPostItem'] = FALSE;
             $data['email'] = $email;
 
             $this->load->helper('form');

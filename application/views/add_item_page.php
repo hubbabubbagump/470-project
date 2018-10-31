@@ -5,16 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="/css/login.css">
         <link rel="stylesheet" href="/css/header.css">
-       
     </head>
-  	<body class= "loginContainer">
+  	<body class= "loginContainer" id="formbody">
   		<h1>Post New Item</h1>
   		<div class="addpost">
-		<?php 
-		echo validation_errors();
-		//echo form_open('add_item'); //uri will show index/add_item- ADD TO ROUTES
-		?>
-		<form name="addItemForm">
+		<?php echo validation_errors(); ?>
+		<form onsubmit="event.preventDefault(); return addItem()" name="addItemForm" >
+			<fieldset>
 			<label><b>Title</b></label><br/>
 			<input type="text" name="title" placeholder="Title" value="<?php echo set_value('title'); ?>"/><br/>
 
@@ -28,13 +25,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="In good condition. pick up only." value="<?php echo set_value('desc'); ?>"/><br/>
 
-			<input class="button" type="submit" value="Post Item" onClick="addItem();"/><br/>
+			<input class="button" type="submit" value="Post Item"/><br/>
+
+			<p id="error"></p>
+			</fieldset>
 		</form>
 	</div>
 	<script src="/js/jquery-3.3.1.min.js"></script>
     <script type='text/javascript' src="/js/addItem.js"></script>
     <script type='text/javascript' src="/js/header.js"></script>
-	<!-- HOW to get seller id??? -->
 	</body>
 
 </html>

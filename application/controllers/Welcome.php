@@ -27,6 +27,10 @@ class Welcome extends CI_Controller {
 
 		if (isset($_SESSION['user_id'])) {
             $this->showLogin = FALSE;
+			$headerData['showPostItem'] = TRUE;
+		}
+		else {
+			$headerData['showPostItem'] = FALSE;
 		}
 
 		$headerData['showLogin'] = $this->showLogin;

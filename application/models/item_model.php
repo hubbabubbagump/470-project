@@ -14,24 +14,17 @@
     		parent::__construct();
     	}
 
-    	public function addItem($sellerID)
+    	public function addItem($sellerID): string
     	{
-    		$this->load->helper('url');
-    		//$slug = url_title($this->input->post('title'), 'dash', TRUE);
-
-    		// need to check that all values ara valid?- should be done in controller
-
-    		// need to create a new db client? confirm on discord
     		$database = new MongoDB\Client(getDBAddr());
-
-    		addItem(
-    			 $database->local->saleItems
-    			,$this->input->post('title')
-    			,$sellerID
-    			,$this->input->post('faculty')
-    			,$this->input->post('courseNum')
-    			,$this->input->post('desc')
-    			,$this->input->post('price'));
+            return insertItem(
+                 $database->local->saleItems
+                ,$_POST['title']
+                ,$sellerID
+                ,$_POST['faculty']
+                ,$_POST['courseNum']
+                ,$_POST['desc']
+                ,$_POST['price']);
     	}
 
     	public function removeItem()
@@ -39,8 +32,10 @@
 
     	}
 
-    	public function getItemSummary()
+    	public function getItemDetailsById($id)
     	{
+             $database = new MongoDB\Client(getDBAddr());
+            return getItemById($database->local->saleItems, $id);
 
     	}
     	

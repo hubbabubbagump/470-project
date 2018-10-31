@@ -16,6 +16,7 @@ class Register extends CI_Controller {
             $name = "";
 
             $headerData["showLogin"] = $this->showLogin;
+            $headerData['showPostItem'] = FALSE;
             $data['email'] = $email;
             $data['name'] = $name;
 

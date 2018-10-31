@@ -7,6 +7,10 @@
         }
     }
 
+    function printDocument($bson) {
+        print_r(json_encode(json_decode(BSONtoJSON($bson)), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n");
+    }
+
     function BSONtoJSON ($bson) {
         return MongoDB\BSON\toJSON(MongoDB\BSON\fromPHP($bson));
     }

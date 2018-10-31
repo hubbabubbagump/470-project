@@ -19,6 +19,6 @@
 
     // Add some test data
     for ($i = 0; $i < 5; $i++) {
-        addItem($saleItems, "Example Textbook " . $i, "exampleID" . $i, "CMPT", 470, "Slightly used textbook in good condition", 1);
+        insertItem($saleItems, "Example Textbook " . $i, "exampleID" . $i, "CMPT", 470, "Slightly used textbook in good condition", 1);
     }
 ?>
