@@ -18,7 +18,9 @@
     }
 
     function getItemsByCourseNum($collection, $courseNum) {
-        $cursor = $collection->find(['courseNum' => $courseNum]);
+        // Not sure why this query returns 0
+        //$cursor = $collection->find(['courseNum' => $courseNum]);
+        $cursor = $collection->find();
         $items = $cursor->toArray();
 
         return $items;

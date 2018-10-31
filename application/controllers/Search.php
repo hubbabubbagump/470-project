@@ -23,8 +23,12 @@ class Search extends CI_Controller {
 		$this->load->view('search');
 	}
 
-	public function getItems($courseNum = 470) {
-		$data['items'] = $this->search_model->getItems($courseNum);
+	public function getItems() {
+		// TODO: do some form validation here
+
+		$courseNum = $this->input->post("searchQuery");
+
+		$data['items'] = json_encode($this->search_model->getItems($courseNum));
 
 		$this->load->view('search/search_results', $data);
 	}

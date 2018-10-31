@@ -11,7 +11,7 @@ function addItem() {
 	var sellerID = "";
 	window.alert("sending request to create new item");
 	request = $.ajax({
-		url: "/index.php/Item/create",
+		url: "/index.php/item/create",
 		type: "post",
 		data: {
 			 title: form['title'].value
