@@ -15,13 +15,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to 470 Project!</h1>
+	<h1>Find Textbooks</h1>
+
+	<form name="searchForm" onsubmit="event.preventDefault(); return getItems()">
+		Course Number: <br>
+		<input type="number" name="searchQuery"><br>
+	</form>
 
 	<div id="body">
-		<p id="text"> Hello World </p>
+		<table id="resultsTable">
+			<thead>
+				<th>Title</th>
+				<th>Faculty</th>
+				<th>CourseNum</th>
+				<th>Desc</th>
+				<th>Date Posted</th>
+				<th>Seller</th>
+				<th>Price</th>
+			</thead>
+		</table>
 	</div>
-
-	<button type='button' id='test' onClick='getItems()'>Click me</button>
 	
 </div>
 
