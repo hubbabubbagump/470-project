@@ -24,7 +24,7 @@
 
     function getItemsByQuery($collection, $filter) {
         if(empty($filter)) {
-            $cursor = $colleciton->find();
+            $cursor = $collection->find();
         } else {
             $cursor = $collection->find($filter);
         }

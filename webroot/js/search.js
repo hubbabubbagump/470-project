@@ -4,7 +4,7 @@ var request;
 
 function getItems() {
 	var form = document.forms["searchForm"];
-	var textArea = document.getElementById("text");
+	var textArea = document.getElementById("info");
 
 	if (request) {
 		request.abort();
@@ -24,12 +24,19 @@ function getItems() {
 		var data = convertRawResponse(response);
 
 		clearTable();
-		for (var key in data) {
-			createResultRow(data[key]);
+
+		if ($.isEmptyObject(data)) {
+			textArea.innerHTML = "No Items Found";
+		} else {
+			textArea.innerHTML = "";
+			for (var key in data) {
+				createResultRow(data[key]);
+			}
 		}
 	});
 
 	request.fail( function(jqXHR, textStatus, errorThrown) {
+		clearTable();
 		textArea.innerHTML = errorThrown;
 	});
 }

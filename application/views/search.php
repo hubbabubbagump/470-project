@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="container">
 	<h1>Find Textbooks</h1>
+	<h3>Enter any number of fields</h3>
 
 	<form name="searchForm" onsubmit="event.preventDefault(); return getItems()">
 		<!-- I'm not sure why int fields don't work... fix later
@@ -43,6 +44,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</tbody>
 		</table>
 	</div>
+
+	<div><p id="info"></p></div>
 	
 </div>
 
