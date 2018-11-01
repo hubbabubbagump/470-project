@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <p id="error"></p>
 
-                    <input class="button" type="submit" value="Login"/>            
+                    <input class="userbutton" type="submit" value="Login"/>            
                 </form>
 
             </div>

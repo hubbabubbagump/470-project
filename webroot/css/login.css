@@ -1,4 +1,4 @@
-input {/*[type=text], input[type=password], input[type=email] {*/
+input[type=text], input[type=password], input[type=email], input[type=textbox], input[type=number] {
     width: 100%;
     padding: 12px 10px;
     margin: 8px 0;
@@ -12,7 +12,23 @@ input {/*[type=text], input[type=password], input[type=email] {*/
     font-size: 16px;
 }
 
+.loginContainer .userbutton {
+    background-color: #A6192E;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0px #777;
+}
+
 .loginContainer .button {
+    width: 100%;
     background-color: #A6192E;
     border: none;
     color: white;
@@ -31,6 +47,10 @@ input {/*[type=text], input[type=password], input[type=email] {*/
     opacity: .8;
 }
 
+.loginContainer .userbutton:hover {
+    opacity: .8;
+}
+
 h1 {
     text-align: center;
     color: white;
@@ -39,7 +59,14 @@ h1 {
     padding: 20px;
 }
 
-.loginContainer .signin .addpost{
+.loginContainer .signin {
+    max-width: 330px;
+    padding: 30px;
+    margin: 0px auto;
+    color: #54585A;
+}
+
+.loginContainer .addpost {
     max-width: 330px;
     padding: 30px;
     margin: 0px auto;

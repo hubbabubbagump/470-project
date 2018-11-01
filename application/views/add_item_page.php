@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 			<input type="text" name="faculty" pattern="[A-Za-z]{4}" placeholder="CMPT" value="<?php echo set_value('faculty'); ?>"/><br/>
 
 			<label><b>Course Number</b></label><br/>
-			<input type='text' name="courseNum" pattern = "[0-9]{3}" placeholder="123" value="<?php echo set_value('courseNum'); ?>"/><br/>
+			<input type="text" name="courseNum" pattern = "[0-9]{3}" placeholder="123" value="<?php echo set_value('courseNum'); ?>"/><br/>
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="In good condition. pick up only." value="<?php echo set_value('desc'); ?>"/><br/>
 
