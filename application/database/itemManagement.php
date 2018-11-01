@@ -1,6 +1,6 @@
 <?php
     
-    require_once DATABASE . "utilities.php";
+    include_once __DIR__ . "../utilities.php";
 
     function insertItem ($collection, $title, $sellerID, $faculty, $courseNum, $desc, $price): string {
 
