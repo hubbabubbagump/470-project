@@ -30,7 +30,8 @@ Please contact Matthew if database changes need to be made
 Both VM's should automatically start their respective parts, so there is no need to enter any commands.
 The website connects to the internal IP, so the external IP should not matter.
 Currently, the gcp firewall allows internal connections on port 27017
-
+If you deploy changes to the Mongodb make sure you turn the service on and off, this can be done from Task Manager-> Services.
+If you push changes to the website, make sure you restart the service through IIS. Also make sure your browser isn't keeping things in cache, force reload page with ctrl f5
 
 <br>
 Adding scripts to setup the web application (e.g. adding database scripts):
