@@ -5,8 +5,8 @@
         $internalMongo = "10.142.0.3";
         $port = 27017;
 
-        //$useProduction = true;
-        $useProduction = false;
+        $useProduction = true;
+        //$useProduction = false;
 
         if ($useProduction) {
             $address = "mongodb://" . $internalMongo . ":" . $port;
