@@ -18,8 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Find Textbooks</h1>
 
 	<form name="searchForm" onsubmit="event.preventDefault(); return getItems()">
+		<!-- I'm not sure why int fields don't work... fix later
 		Course Number: <br>
-		<input type="number" name="searchQuery"><br>
+		<input type="number" name="courseNum"><br>-->
+		Title: <br>
+		<input type="text" name="title"><br>
+		Faculty: <br>
+		<input type="text" name="faculty"><br>
+		<input type="submit">
 	</form>
 
 	<div id="body">
@@ -33,6 +39,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<th>Seller</th>
 				<th>Price</th>
 			</thead>
+			<tbody>
+			</tbody>
 		</table>
 	</div>
 	

@@ -22,13 +22,16 @@
         return $id;
     }
 
-    function getItemsByCourseNum($collection, $courseNum) {
-        // Not sure why this query returns 0
-        //$cursor = $collection->find(['courseNum' => $courseNum]);
-        $cursor = $collection->find();
+    function getItemsByQuery($collection, $filter) {
+        if(empty($filter)) {
+            $cursor = $colleciton->find();
+        } else {
+            $cursor = $collection->find($filter);
+        }
         $items = $cursor->toArray();
+        $result = BSONtoJSON($items);
 
-        return $items;
+        return $result;
     }
 
     function getItemById($collection, $id) {

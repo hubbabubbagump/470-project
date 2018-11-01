@@ -14,7 +14,9 @@ function getItems() {
 		url: "/index.php/search/getItems",
 		type: "post",
 		data: {
-			courseNum: form['searchQuery'].value
+			//courseNum: form['courseNum'].value,
+			title: form['title'].value,
+			faculty: form['faculty'].value,
 		}
 	});
 
@@ -22,9 +24,9 @@ function getItems() {
 		var data = convertRawResponse(response);
 
 		clearTable();
-		data.forEach(function(element) {
-			createResultRow(element);
-		})
+		for (var key in data) {
+			createResultRow(data[key]);
+		}
 	});
 
 	request.fail( function(jqXHR, textStatus, errorThrown) {
@@ -33,9 +35,7 @@ function getItems() {
 }
 
 function convertRawResponse(response) {
-	var pos = response.indexOf("[{");
-	var str = response.substring(pos, response.length-2);
-	return JSON.parse(str);
+	return JSON.parse(response);
 }
 
 function createResultRow(entry) {
@@ -66,5 +66,5 @@ function createResultRow(entry) {
 }
 
 function clearTable() {
-	$("#resultsTable tbody tr").remove();
+	$("#resultsTable thead td").remove();
 }

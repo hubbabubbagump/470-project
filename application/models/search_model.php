@@ -11,10 +11,10 @@
             parent::__construct();
         }
 
-        public function getItems($courseNum) {
+        public function getItemsFromDB($filter) {
             $database = new MongoDB\Client(getDBAddr());
 
-            return getItemsByCourseNum($database->local->saleItems, $courseNum);
+            return getItemsByQuery($database->local->saleItems, $filter);
         }
     }
 

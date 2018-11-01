@@ -27,9 +27,17 @@ class Search extends CI_Controller {
 	public function getItems() {
 		// TODO: do some form validation here
 
-		$courseNum = $this->input->post("searchQuery");
+		$postData = $this->input->post(NULL, FALSE);
+		$filter = array();
 
-		$data['items'] = json_encode($this->search_model->getItems($courseNum));
+		foreach($postData as $key => $value) {
+			if (!empty($value)) {
+				$filter[$key] = array('$regex' => $value);
+			}
+		}
+
+		//$data['items'] = var_dump($filter);
+		$data['items'] = $this->search_model->getItemsFromDB($filter);
 
 		$this->load->view('search/search_results', $data);
 	}
