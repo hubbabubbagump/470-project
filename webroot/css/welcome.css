@@ -1,0 +1,80 @@
+body {
+    background-color: #54585A;
+}
+
+.search {
+    max-width: 740px;
+    width: 80%;
+    padding: 30px;
+    margin: 0px auto;
+    color: #54585A;
+}
+
+.sTerm {
+    display: block;
+    overflow: hidden;
+    /* padding-right: 10px; */
+}
+
+.searchTerm {
+    padding: 12px 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.searchButton {
+    float: right;
+    margin: 8px 0;
+    height: 41px;
+    background-color: #A6192E;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.searchText {
+    margin: 10px 0 0 0;
+    text-align: center;
+}
+
+.searchWrapper {
+    width: 100%;
+    background-color: #54585A;
+    padding-bottom: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.loading{
+    font-size:0;
+    width:25px;
+    height:25px;
+    margin-top:5px;
+    border-radius: 50%;
+    padding:0;
+    border:3px solid #FFFFFF;
+    border-bottom:3px solid rgba(255,255,255,0.0);
+    border-left:3px solid rgba(255,255,255,0.0);
+    background-color: #A6192E !important;
+    animation-name: rotateAnimation;
+    -webkit-animation-name: wk-rotateAnimation;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-delay: 0.2s;
+    -webkit-animation-delay: 0.2s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+  }
+  
+  @keyframes rotateAnimation {
+      0%   {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+  }
+  @-webkit-keyframes wk-rotateAnimation {
+      0%   {-webkit-transform: rotate(0deg);}
+      100% {-webkit-transform: rotate(360deg);}
+  }
