@@ -2,10 +2,10 @@
     
     include_once __DIR__ . "../utilities.php";
 
-    function insertItem ($collection, $title, $sellerID, $faculty, $courseNum, $desc, $price): string {
+    function insertItem ($collection, $title, $sellerID, string $faculty, string $courseNum, string $desc, $price): string {
 
         $date = new DateTime();
-        $timestamp = $date->getTimestamp();
+        $timestamp = $date->getTimestamp() * 1000;
         $id = uniqid();
         $result = $collection->insertOne([
             'title' => $title,
@@ -45,5 +45,38 @@
         return $result;
 
 
+    }
+
+    function getItemsByIndex($collection, $query) {
+        $scoreThreshold = 1;
+
+        $results = array();
+        $cursor = $collection->find(
+            [
+                '$text' => [
+                    '$search' => $query
+                ]
+            ],
+            [
+                'projection' => [
+                    'score' => ['$meta' => 'textScore'],
+                    'title' => 1,
+                    'desc' => 1,
+                    'faculty' => 1,
+                    'courseNum' => 1
+                ],
+                'sort' => [
+                    'score' => ['$meta' => 'textScore']
+                    ]
+            ]
+        );
+
+        foreach ($cursor as $item) {
+            if ($item->score >= $scoreThreshold) {
+                array_push($results, $item);
+            }
+         };
+
+        return json_encode($results);
     }
 ?>

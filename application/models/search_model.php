@@ -16,6 +16,11 @@
 
             return getItemsByQuery($database->local->saleItems, $filter);
         }
+
+        public function searchByIndex($text) {
+            $database = new MongoDB\Client(getDBAddr());
+            return getItemsByIndex($database->local->saleItems, $text);
+        }
     }
 
 ?>

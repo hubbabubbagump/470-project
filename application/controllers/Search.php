@@ -41,4 +41,10 @@ class Search extends CI_Controller {
 
 		$this->load->view('search/search_results', $data);
 	}
+
+	public function search() {
+		$query = $_GET['query'];
+		$results = $this->search_model->searchByIndex($query);
+		echo $results;
+	}
 }

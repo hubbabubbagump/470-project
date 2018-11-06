@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <p>
                         <label><b>Name</b></label>
                         <br>
-                        <input type="text" name="name" placeholder="Enter Name" value="<?php echo $name; ?>"/>
+                        <input autofocus type="text" name="name" placeholder="Enter Name" value="<?php echo $name; ?>"/>
                         <br>
                     </p> 
 

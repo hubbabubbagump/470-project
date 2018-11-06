@@ -5,7 +5,7 @@
         $internalMongo = "10.142.0.3";
         $port = 27017;
 
-        $useProduction = true;
+        $useProduction = false;
         //$useProduction = false;
 
         if ($useProduction) {
