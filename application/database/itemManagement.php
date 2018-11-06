@@ -47,8 +47,12 @@
 
     }
 
-    function getItemsByIndex($collection, $query) {
-        $scoreThreshold = 1;
+    function getItemsByIndex($collection, $query, $page) {
+        $scoreThreshold = 1.2;
+        $itemsPerPage = 10;
+        $itemMin = ($page - 1) * $itemsPerPage;
+        $itemMax = ($page * $itemsPerPage) - 1;
+        $moreItems = true;
 
         $results = array();
         $cursor = $collection->find(
@@ -63,7 +67,9 @@
                     'title' => 1,
                     'desc' => 1,
                     'faculty' => 1,
-                    'courseNum' => 1
+                    'courseNum' => 1,
+                    'price' => 1,
+                    '_id' => 1
                 ],
                 'sort' => [
                     'score' => ['$meta' => 'textScore']
@@ -71,12 +77,77 @@
             ]
         );
 
+        $cursor = $cursor->toArray();
         foreach ($cursor as $item) {
             if ($item->score >= $scoreThreshold) {
                 array_push($results, $item);
             }
+
          };
 
-        return json_encode($results);
+         $trueResults = array();
+         $length = count($results);
+         $i = 0;
+         foreach ($results as $item) {
+            if ( $i >= $itemMin && $i <= $itemMax) {
+                array_push($trueResults, $item);
+            }
+
+            if ($i >= $length - 1) {
+                $moreItems = false;
+                break;
+            }
+
+            $i += 1;
+         }
+
+        return json_encode(array('results' => $results, 'moreItems' => $moreItems));
+    }
+
+    function getNewestItems($collection, $page) {
+        $itemsPerPage = 10;
+        $itemMin = ($page - 1) * $itemsPerPage;
+        $itemMax = ($page * $itemsPerPage) - 1;
+        $moreItems = true;
+
+        $results = array();
+        $cursor = $collection->find(
+            [],
+            [
+                'projection' => [
+                    'score' => ['$meta' => 'textScore'],
+                    'title' => 1,
+                    'desc' => 1,
+                    'faculty' => 1,
+                    'courseNum' => 1,
+                    'price' => 1,
+                    '_id' => 1
+                ],
+                'sort' => [
+                    'datePosted' => -1    
+                ]
+            ]
+        );
+
+        $cursor = $cursor->toArray();
+        $length = count($cursor);
+        $i = 0;
+        foreach ($cursor as $item) {
+            if ($i >= $itemMin && $i <= $itemMax) {
+                array_push($results, $item);
+            }
+            else if ($i > $itemMax) {
+                break;
+            }
+
+            if ($i >= $length - 1) {
+                $moreItems = false;
+                break;
+            }
+
+            $i += 1;
+         };
+
+         return json_encode(array('results' => $results, 'moreItems' => $moreItems));
     }
 ?>

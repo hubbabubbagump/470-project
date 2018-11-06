@@ -2,10 +2,24 @@ body {
     background-color: #54585A;
 }
 
+#loader {
+    padding-top: 20px;
+    width: 100%;
+}
+
+#loaderContainer {
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+#container {
+    background-color: #F5F5F5;
+}
+
 .search {
     max-width: 740px;
     width: 80%;
-    padding: 30px;
+    padding: 50px 30px;
     margin: 0px auto;
     color: #54585A;
 }
@@ -13,7 +27,6 @@ body {
 .sTerm {
     display: block;
     overflow: hidden;
-    /* padding-right: 10px; */
 }
 
 .searchTerm {
@@ -36,6 +49,10 @@ body {
     cursor: pointer;
 }
 
+.searchButton:hover {
+    background-color: #B64556;
+}
+
 .searchText {
     margin: 10px 0 0 0;
     text-align: center;
@@ -47,6 +64,7 @@ body {
     padding-bottom: 30px;
     margin: 0;
     padding: 0;
+    box-shadow: 0 4px 10px 2px gray;
 }
 
 .loading{
@@ -70,11 +88,105 @@ body {
     -webkit-animation-iteration-count: infinite;
   }
   
-  @keyframes rotateAnimation {
-      0%   {transform: rotate(0deg);}
-      100% {transform: rotate(360deg);}
-  }
-  @-webkit-keyframes wk-rotateAnimation {
-      0%   {-webkit-transform: rotate(0deg);}
-      100% {-webkit-transform: rotate(360deg);}
-  }
+@keyframes rotateAnimation {
+    0%   {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+@-webkit-keyframes wk-rotateAnimation {
+    0%   {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+
+#itemWrapper {
+    width: 100%;
+    background-color: #F5F5F5;
+    margin: 10px 0 0 0;
+    padding: 0 0 20px 0;
+}
+
+#itemContainer {
+    max-width: 600px;
+    width: 80%;
+    padding: 30px;
+    margin: 0px auto;
+    color: #000;
+    padding: 0;
+}
+
+#itemContainer h1 {
+    font-size: 20px;
+    padding: 5px 5px 5px 15px;
+    color: #54585A;
+}
+
+#noItems {
+    text-align: center;
+}
+
+.itemBox {
+    padding: 15px;
+}
+
+.itemBox p {
+    margin: 5px;
+}
+
+.itemBox .title {
+    color: #A6192E;
+    font-weight: 550;
+    font-size: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.itemBox .title:hover {
+    opacity: .7;
+}
+
+.itemBox .course {
+    color: #A6192E;
+    font-weight: 550;
+    font-size: 15px;
+}
+
+.itemBox .price {
+    font-size: 15px;
+    color: #54585A;
+}
+
+.itemBox .desc {
+    font-size: 15px;
+    color: #54585A;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.getMore {
+    width: 100%;
+    margin: 8px 0;
+    height: 41px;
+    background-color: #A6192E;
+    border: none;
+    color: white;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.getMore:hover {
+    opacity: .8;
+}
+
+.loaderDivMore {
+    position: absolute;
+    left: 50%;
+}
+
+#moreText {
+    padding: 10px 0 0 0;
+    text-align: center;
+}

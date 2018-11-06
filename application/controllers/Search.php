@@ -43,8 +43,15 @@ class Search extends CI_Controller {
 	}
 
 	public function search() {
-		$query = $_GET['query'];
-		$results = $this->search_model->searchByIndex($query);
+		$query = $_GET['search'];
+		$page = $_GET['page'];
+		$results = $this->search_model->searchByIndex($query, $page);
+		echo $results;
+	}
+
+	public function new() {
+		$page = $_GET['page'];
+		$results = $this->search_model->getNewest($page);
 		echo $results;
 	}
 }
