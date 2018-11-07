@@ -27,6 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="bigLoading"></div>
 			</div>
 		</div>
+
 		<div id="itemWrapper">
 			<div id="itemContainer">
 				<h1 id="noItems" style="display:none">No Items Found</h1>
@@ -36,6 +37,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<p id="moreText">Show More</p>
 				</div>
 				<!-- <input type="submit" id="getMore" class="getMore" value="Show More" onclick="getMore()"></input> -->
+			</div>
+		</div>
+
+		<div id="modal" class="modal">
+			<div id="modalContent" class="modalContent">
+				<div id="modalHeader" class="modalHeader"><p id="modalTitle"></p></div>
+				<div id="modalBody" class="modalBody">
+					<div id="modalSeller"></div>
+					<div id="modalCourse"></div>
+					<div id="modalPrice"></div>
+					<div id="modalDesc"></div>
+					<div id="images"></div>
+				</div>
 			</div>
 		</div>
 	</div>

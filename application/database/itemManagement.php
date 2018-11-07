@@ -2,7 +2,7 @@
     
     include_once __DIR__ . "../utilities.php";
 
-    function insertItem ($collection, $title, $sellerID, string $faculty, string $courseNum, string $desc, $price): string {
+    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price): string {
 
         $date = new DateTime();
         $timestamp = $date->getTimestamp() * 1000;
@@ -14,10 +14,11 @@
             'desc' => $desc,
             'datePosted' => $timestamp,
             '_id' => $id,
-            'seller' => $sellerID,
+            'sellerEmail' => $sellerEmail,
+            'sellerName' => $sellerName,
             'price' => $price
         ]);
-        echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
+        // echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
 
         return $id;
     }
@@ -35,16 +36,10 @@
     }
 
     function getItemById($collection, $id) {
-        $cursor = $collection->find(['_id' => $id]);
-        $item = $cursor->toArray();
-        // get BSON object by item[0]
-        // convert to json string using BSONtoJSON
-        // convert json string to array using json_decode
-        $result = json_decode(BSONtoJSON($item[0]), true);
+        $item = $collection->findOne(['_id' => $id]);
+        $result = json_encode($item);
         
         return $result;
-
-
     }
 
     function getItemsByIndex($collection, $query, $page) {

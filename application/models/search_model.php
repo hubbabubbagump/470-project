@@ -26,6 +26,11 @@
             $database = new MongoDB\Client(getDBAddr());
             return getNewestItems($database->local->saleItems, $page);
         }
+
+        public function getById($id) {
+            $database = new MongoDB\Client(getDBAddr());
+            return getItemById($database->local->saleItems, $id);
+        }
     }
 
 ?>

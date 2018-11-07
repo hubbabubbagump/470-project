@@ -36,4 +36,12 @@
 
         return False;
     }
+
+    function getUserName($collection, string $email):string {
+        $user = $collection->findOne(['email' => $email]);
+        if (empty($user)) {
+            return "";
+        }
+        return $user->name;
+    }
 ?>

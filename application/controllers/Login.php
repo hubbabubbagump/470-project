@@ -39,7 +39,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            header('HTTP/1.1 401 Invalid parameters');
+            header('HTTP/2 401 Invalid parameters');
             die(json_encode(array('message' => 'INVALID PARAMETERS')));
         }
         else {
@@ -48,7 +48,7 @@ class Login extends CI_Controller {
             $result = $this->login_model->login($email, $pw);
 
             if (!$result) {
-                header('HTTP/1.1 401 Invalid email or password');
+                header('HTTP/2 401 Invalid email or password');
                 die(json_encode(array('message' => 'INVALID CREDENTIALS')));
             }
             else {

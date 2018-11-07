@@ -1,3 +1,5 @@
+'user strict'
+
 var searchBox = document.getElementById("searchBox");
 searchBox.addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -5,6 +7,12 @@ searchBox.addEventListener("keyup", function(event) {
         getItems();
     }
 });
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById("modal")) {
+        document.getElementById("modal").style.display = "none";
+    }
+}
 
 var searchRequest;
 var page = 1;
@@ -60,7 +68,7 @@ function getItems() {
 
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
-                    var item = results[i];
+                    let item = results[i];
                     // console.log(item.title);
                     var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
@@ -89,6 +97,10 @@ function getItems() {
                     div.appendChild(price);
                     // div.appendChild(description);
                     container.appendChild(div);
+
+                    title.addEventListener("click", function() {
+                        openModal(item._id);
+                    });
                 }
             }
             
@@ -145,7 +157,7 @@ function getMore() {
         else {
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
-                    var item = results[i];
+                    let item = results[i];
                     // console.log(item.title);
                     var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
@@ -173,6 +185,10 @@ function getMore() {
                     div.appendChild(course);
                     div.appendChild(price);
                     container.appendChild(div);
+
+                    title.addEventListener("click", function() {
+                        openModal(item._id);
+                    });
                 }
             }
             
@@ -231,7 +247,7 @@ function getNewItems() {
 
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
-                    var item = results[i];
+                    let item = results[i];
                     // console.log(item.title);
                     var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
@@ -248,7 +264,7 @@ function getNewItems() {
                     course.className = "course";
 
                     var price = document.createElement("p");
-                    price.innerText = "$" + item.price.toFixed(2);
+                    price.innerText = "$" + parseFloat(item.price).toFixed(2);
                     price.className = "price";
 
                     var description = document.createElement("p");
@@ -259,6 +275,10 @@ function getNewItems() {
                     div.appendChild(course);
                     div.appendChild(price);
                     container.appendChild(div);
+
+                    title.addEventListener("click", function() {
+                        openModal(item._id);
+                    });
                 }
             }
             
@@ -281,4 +301,55 @@ function getNewItems() {
         $(".loaderDivMore").removeClass("loading");
         document.getElementById("moreText").style.display = "block";
     })
+}
+
+var itemRequest;
+
+function openModal(id) {
+    if (itemRequest) {
+        itemRequest.abort();
+    }
+
+    itemRequest = $.ajax({
+        url:  "/index.php/search/id",
+        type: "get",
+        data: {id: id}
+    });
+
+    itemRequest.done(function (response, textStatus, jqXHR) {
+        if (response) {
+            var item = JSON.parse(response);
+            var modalHeader = document.getElementById("modalTitle");
+            modalHeader.innerText = item.title;
+
+            var seller = document.getElementById("modalSeller");
+            seller.innerText = "Seller: " + item.sellerName;
+
+            var course = document.getElementById("modalCourse");
+            course.innerText = "Course: " + item.faculty + " " + item.courseNum;
+
+            var price = document.getElementById("modalPrice");
+            price.innerText = "Price: $" + parseFloat(item.price).toFixed(2);
+            
+            var desc = document.getElementById("modalDesc");
+            desc.innerText = item.desc;
+
+            document.getElementById("modal").style.display = "block";
+        }
+        else {
+            alert("Invalid item id");
+        }
+    });
+
+    itemRequest.fail(function(jqXHR, textStatus, errorThrown) {
+    });
+
+    // while (container.firstChild) {
+    //     container.removeChild(container.firstChild);
+    // }
+    // <div id="modalSeller"></div>
+	// 				<div id="modalCourse"></div>
+	// 				<div id="modalPrice"></div>
+	// 				<div id="modalDesc"></div>
+	// 				<div id="images"></div>
 }

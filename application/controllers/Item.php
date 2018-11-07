@@ -37,26 +37,28 @@
 
 			if ($this->form_validation->run() === FALSE)
 			{
-				echo "form validation failed";
-				echo "\ntitle: ".$data['title'];
+				header('HTTP/2 401 Invalid parameters');
+				die(json_encode(array('message' => 'INVALID PARAMETERS')));
 				
-				$headerData['showPostItem'] = FALSE;
+				// $headerData['showPostItem'] = FALSE;
 
-				$this->load->view('header', $headerData);
-				$this->load->view('add_item_page');
+				// $this->load->view('header', $headerData);
+				// $this->load->view('add_item_page');
 			}
 			else
 			{	
-				$headerData['showPostItem'] = TRUE;
+				// $headerData['showPostItem'] = TRUE;
 				
-				$sellerID = $_SESSION['user_id']; 
-				$idCreated = $this->item_model->addItem($sellerID);
+				$sellerEmail = $_SESSION['user_id']; 
+				$idCreated = $this->item_model->addItem($sellerEmail);
 				//echo 'Successfully added new item for user '.$sellerID."\n";
 
 				$item = $this->item_model->getItemDetailsById($idCreated);
 
-				$this->load->view('header', $headerData);
-				$this->load->view('add_item_success_page', $item);
+				// $this->load->view('header', $headerData);
+				// $this->load->view('add_item_success_page', $item);
+				echo 'HTTP/2 201';
+				
 			}
 		}
 	}

@@ -42,6 +42,7 @@ class Search extends CI_Controller {
 		$this->load->view('search/search_results', $data);
 	}
 
+	//Searches using a full text search
 	public function search() {
 		$query = $_GET['search'];
 		$page = $_GET['page'];
@@ -49,9 +50,17 @@ class Search extends CI_Controller {
 		echo $results;
 	}
 
+	//Fetches the newest items posted
 	public function new() {
 		$page = $_GET['page'];
 		$results = $this->search_model->getNewest($page);
+		echo $results;
+	}
+
+	//Fetches an item by their id
+	public function id() {
+		$id = $_GET['id'];
+		$results = $this->search_model->getById($id);
 		echo $results;
 	}
 }

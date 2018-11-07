@@ -37,11 +37,12 @@ function addItem() {
 	});
 
 	request.done(function (response){
-		//window.location.href = "/"; //change to show post
+		window.location.href = "/"; //change to show post
+		alert("Item created")
 		//form.style.visibility = "hidden";
 		//$("#formbody").html(response);
 		//location.replace("/add_item_sucess_page");
-		$("html").html(response);
+		// $("html").html(response);
 		//$("html").innerText = response;
 		//$("html").html($("html", response).html()); 
 	});
