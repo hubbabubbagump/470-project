@@ -4,18 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Messages</title>
 
 	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="/js/header.js"></script>
-	<script type='text/javascript' src="/js/search.js"></script>
+	<script type='text/javascript' src="/js/messages.js"></script>
 	<link rel="stylesheet" href="/css/header.css">
 
 </head>
 <body>
 
 <div id="container">
-	<h1>Find Textbooks</h1>
+	<h1>Personal Messages</h1>
 	<h3>Enter any number of fields</h3>
 
 	<form name="searchForm" onsubmit="event.preventDefault(); return getItems()">
@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div><p id="info"></p></div>
-	
+
 </div>
 
 </body>

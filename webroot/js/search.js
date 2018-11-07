@@ -4,7 +4,7 @@ var request;
 
 function getItems() {
 	var form = document.forms["searchForm"];
-	var textArea = document.getElementById("text");
+	var textArea = document.getElementById("info");
 
 	if (request) {
 		request.abort();
@@ -14,7 +14,9 @@ function getItems() {
 		url: "/index.php/search/getItems",
 		type: "post",
 		data: {
-			courseNum: form['searchQuery'].value
+			//courseNum: form['courseNum'].value,
+			title: form['title'].value,
+			faculty: form['faculty'].value,
 		}
 	});
 
@@ -22,20 +24,25 @@ function getItems() {
 		var data = convertRawResponse(response);
 
 		clearTable();
-		data.forEach(function(element) {
-			createResultRow(element);
-		})
+
+		if ($.isEmptyObject(data)) {
+			textArea.innerHTML = "No Items Found";
+		} else {
+			textArea.innerHTML = "";
+			for (var key in data) {
+				createResultRow(data[key]);
+			}
+		}
 	});
 
 	request.fail( function(jqXHR, textStatus, errorThrown) {
+		clearTable();
 		textArea.innerHTML = errorThrown;
 	});
 }
 
 function convertRawResponse(response) {
-	var pos = response.indexOf("[{");
-	var str = response.substring(pos, response.length-2);
-	return JSON.parse(str);
+	return JSON.parse(response);
 }
 
 function createResultRow(entry) {
@@ -66,5 +73,5 @@ function createResultRow(entry) {
 }
 
 function clearTable() {
-	$("#resultsTable tbody tr").remove();
+	$("#resultsTable thead td").remove();
 }

@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <p>
                         <label><b>Email</b></label>
                         <br>
-                        <input id="email" type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
+                        <input autofocus id="email" type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
                         <br>
                     </p>
 
@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <p id="error"></p>
 
-                    <input class="button" type="submit" value="Login"/>            
+                    <input class="userbutton" type="submit" value="Login"/>            
                 </form>
 
             </div>

@@ -16,9 +16,10 @@
     $local->createCollection("saleItems");
     $saleItems = $local->saleItems;
     echo "[" . $local->getDatabaseName() . "] Created new collection: " . $saleItems->getCollectionName() . "\n";
+    $saleItems->createIndex(['title' => 'text', 'desc' => 'text', 'faculty' => 'text', 'courseNum' => 'text']);
 
     // Add some test data
-    for ($i = 0; $i < 5; $i++) {
-        insertItem($saleItems, "Example Textbook " . $i, "exampleID" . $i, "CMPT", 470, "Slightly used textbook in good condition", 1);
+    for ($i = 0; $i < 15; $i++) {
+        insertItem($saleItems, "Example Textbook " . $i, "user@user.com" . $i, "John Doe", "CMPT", "470", "Slightly used textbook in good condition", 1);
     }
 ?>

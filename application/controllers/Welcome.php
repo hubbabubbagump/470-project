@@ -37,5 +37,6 @@ class Welcome extends CI_Controller {
 		$test = $this->showLogin;
 		$this->load->view('header', $headerData);
 		$this->load->view('welcome_message');
+		$this->load->view('footer');
 	}
 }

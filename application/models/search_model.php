@@ -11,10 +11,25 @@
             parent::__construct();
         }
 
-        public function getItems($courseNum) {
+        public function getItemsFromDB($filter) {
             $database = new MongoDB\Client(getDBAddr());
 
-            return getItemsByCourseNum($database->local->saleItems, $courseNum);
+            return getItemsByQuery($database->local->saleItems, $filter);
+        }
+
+        public function searchByIndex($text, $page) {
+            $database = new MongoDB\Client(getDBAddr());
+            return getItemsByIndex($database->local->saleItems, $text, $page);
+        }
+
+        public  function getNewest($page) {
+            $database = new MongoDB\Client(getDBAddr());
+            return getNewestItems($database->local->saleItems, $page);
+        }
+
+        public function getById($id) {
+            $database = new MongoDB\Client(getDBAddr());
+            return getItemById($database->local->saleItems, $id);
         }
     }
 

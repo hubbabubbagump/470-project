@@ -18,7 +18,8 @@ Html, body {
     display: inline-block;
     text-align: center;
     font-size: 17px;
-    color: #54585A;
+    font-weight: bold;
+    color: #A6192E;
     padding: 4px 2px;
     margin: 14px 16px;
     cursor: pointer;
@@ -50,4 +51,5 @@ Html, body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: inherit;
 }

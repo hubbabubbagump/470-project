@@ -4,7 +4,8 @@
     require_once DATABASE . "settings.php";
     require_once DATABASE . "userManagement.php";
     require_once __DIR__ . '/../vendor/autoload.php';
-    require_once DATABASE . "itemManagement.php";
+	require_once DATABASE . "itemManagement.php";
+	require_once DATABASE . "userManagement.php";
 
     class Item_model extends CI_model
     {
@@ -14,13 +15,15 @@
     		parent::__construct();
     	}
 
-    	public function addItem($sellerID): string
+    	public function addItem($sellerEmail): string
     	{
-    		$database = new MongoDB\Client(getDBAddr());
+			$database = new MongoDB\Client(getDBAddr());
+			$name = getUserName($database->local->users, $sellerEmail);
             return insertItem(
                  $database->local->saleItems
                 ,$_POST['title']
-                ,$sellerID
+				,$sellerEmail
+				,$name
                 ,$_POST['faculty']
                 ,$_POST['courseNum']
                 ,$_POST['desc']

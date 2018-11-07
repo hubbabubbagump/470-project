@@ -6,96 +6,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/welcome.css">
+	<link rel="stylesheet" href="/css/loading.css">
 	<script type='text/javascript' src="/js/header.js"></script>
-	<link rel="stylesheet" href="/css/header.css" />
-
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 0;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-
-	#loginForm {
-		text-align: center;
-		margin: auto;
-		width: 50%;
-		border: solid #D0D0D0;
-		padding: 14px 15px 15px 15px;
-	}
-	</style>
 </head>
-<body>
+<body onload="getNewItems()">
+	<div id="container">
+		<div class="searchWrapper">
+			<div class="search">
+				<div class="searchButton" onclick="getItems()">
+					<div class="loaderDiv"></div>
+					<p id="searchText" class="searchText">Search</p>
+				</div>
+				<span class="sTerm"><input id="searchBox" type="text" class="searchTerm" placeHolder="Search..."/></span>
+			</div>
+		</div>
+		<div id="loader">
+			<div id="loaderContainer">
+				<div class="bigLoading"></div>
+			</div>
+		</div>
 
-<div id="container">
-	<h1>Welcome to 470 Project!</h1>
+		<div id="itemWrapper">
+			<div id="itemContainer">
+				<h1 id="noItems" style="display:none">No Items Found</h1>
+				<div id="itemList"></div>
+				<div  id="getMore" class="getMore" value="Show More" onclick="getMore()">
+					<div class="loaderDivMore"></div>
+					<p id="moreText">Show More</p>
+				</div>
+				<!-- <input type="submit" id="getMore" class="getMore" value="Show More" onclick="getMore()"></input> -->
+			</div>
+		</div>
 
-	<div id="body">
-		<p>This is the welcome page for the CMPT 470 Project</p>
-		<p>This project will become a market place for students to trade items</p>
-
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+		<div id="modal" class="modal">
+			<div id="modalContent" class="modalContent">
+				<div id="modalHeader" class="modalHeader"><p id="modalTitle"></p></div>
+				<div id="modalBody" class="modalBody">
+					<div id="modalSeller"></div>
+					<div id="modalCourse"></div>
+					<div id="modalPrice"></div>
+					<div id="modalDesc"></div>
+					<div id="images"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+    <script type='text/javascript' src="/js/welcome.js"></script>
 
 </body>
 </html>
