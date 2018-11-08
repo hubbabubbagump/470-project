@@ -12,6 +12,10 @@ window.onclick = function(event) {
     if (event.target == document.getElementById("modal")) {
         document.getElementById("modal").style.display = "none";
     }
+
+    if (event.target == document.getElementById("msgModal")) {
+        document.getElementById("msgModal").style.display = "none";
+    }
 }
 
 var searchRequest;
@@ -69,38 +73,8 @@ function getItems() {
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
-                    // console.log(item.title);
-                    var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    div.style.backgroundColor = bColor;
-                    div.className = "itemBox";
-                    div.id = item._id;
-
-                    var title = document.createElement("p");
-                    title.innerText = item.title;
-                    title.className = "title";
-
-                    var course = document.createElement("p");
-                    course.innerText = item.faculty + " " + item.courseNum;
-                    course.className = "course";
-
-                    var price = document.createElement("p");
-                    price.innerText = "$" + item.price.toFixed(2);
-                    price.className = "price";
-
-                    var description = document.createElement("p");
-                    description.innerText = item.desc;
-                    description.className = "desc";
-
-                    div.appendChild(title);
-                    div.appendChild(course);
-                    div.appendChild(price);
-                    // div.appendChild(description);
-                    container.appendChild(div);
-
-                    title.addEventListener("click", function() {
-                        openModal(item._id);
-                    });
+                    renderItem(item, container, bColor);
                 }
             }
             
@@ -158,37 +132,8 @@ function getMore() {
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
-                    // console.log(item.title);
-                    var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    div.style.backgroundColor = bColor;
-                    div.className = "itemBox";
-                    div.id = item._id;
-
-                    var title = document.createElement("p");
-                    title.innerText = item.title;
-                    title.className = "title";
-
-                    var course = document.createElement("p");
-                    course.innerText = item.faculty + " " + item.courseNum;
-                    course.className = "course";
-
-                    var price = document.createElement("p");
-                    price.innerText = "$" + item.price.toFixed(2);
-                    price.className = "price";
-
-                    var description = document.createElement("p");
-                    description.innerText = item.desc;
-                    description.className = "desc";
-
-                    div.appendChild(title);
-                    div.appendChild(course);
-                    div.appendChild(price);
-                    container.appendChild(div);
-
-                    title.addEventListener("click", function() {
-                        openModal(item._id);
-                    });
+                    renderItem(item, container, bColor);
                 }
             }
             
@@ -248,37 +193,8 @@ function getNewItems() {
             for (var i in results) {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
-                    // console.log(item.title);
-                    var div = document.createElement("div");
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    div.style.backgroundColor = bColor;
-                    div.className = "itemBox";
-                    div.id = item._id;
-
-                    var title = document.createElement("p");
-                    title.innerText = item.title;
-                    title.className = "title";
-
-                    var course = document.createElement("p");
-                    course.innerText = item.faculty + " " + item.courseNum;
-                    course.className = "course";
-
-                    var price = document.createElement("p");
-                    price.innerText = "$" + parseFloat(item.price).toFixed(2);
-                    price.className = "price";
-
-                    var description = document.createElement("p");
-                    description.innerText = item.desc;
-                    description.className = "desc";
-
-                    div.appendChild(title);
-                    div.appendChild(course);
-                    div.appendChild(price);
-                    container.appendChild(div);
-
-                    title.addEventListener("click", function() {
-                        openModal(item._id);
-                    });
+                    renderItem(item, container, bColor);
                 }
             }
             
@@ -301,6 +217,47 @@ function getNewItems() {
         $(".loaderDivMore").removeClass("loading");
         document.getElementById("moreText").style.display = "block";
     })
+}
+
+function renderItem(item, container, bColor) {
+    var div = document.createElement("div");
+    div.style.backgroundColor = bColor;
+    div.className = "itemBox";
+    div.id = item._id;
+
+    var msgBox = document.createElement("div");
+    msgBox.className = "msgBox";
+    msgBox.innerText = "Message";
+
+    var title = document.createElement("p");
+    title.innerText = item.title;
+    title.className = "title";
+
+    var course = document.createElement("p");
+    course.innerText = item.faculty + " " + item.courseNum;
+    course.className = "course";
+
+    var price = document.createElement("p");
+    price.innerText = "$" + parseFloat(item.price).toFixed(2);
+    price.className = "price";
+
+    var description = document.createElement("p");
+    description.innerText = item.desc;
+    description.className = "desc";
+
+    div.appendChild(msgBox);
+    div.appendChild(title);
+    div.appendChild(course);
+    div.appendChild(price);
+    container.appendChild(div);
+
+    title.addEventListener("click", function() {
+        openModal(item._id);
+    });
+
+    msgBox.addEventListener("click", function() {
+        openMessageModal(item.sellerEmail);
+    });
 }
 
 var itemRequest;
@@ -343,13 +300,17 @@ function openModal(id) {
 
     itemRequest.fail(function(jqXHR, textStatus, errorThrown) {
     });
+}
 
-    // while (container.firstChild) {
-    //     container.removeChild(container.firstChild);
-    // }
-    // <div id="modalSeller"></div>
-	// 				<div id="modalCourse"></div>
-	// 				<div id="modalPrice"></div>
-	// 				<div id="modalDesc"></div>
-	// 				<div id="images"></div>
+var currentEmail;
+
+function openMessageModal(email) {
+    currentEmail = email;
+    var msgModal = document.getElementById("msgModal");
+    msgModal.style.display = "block";
+}
+
+function sendMessage() {
+    var email = currentEmail;
+    console.log(email);
 }

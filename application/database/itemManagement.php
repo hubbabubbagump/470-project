@@ -64,7 +64,8 @@
                     'faculty' => 1,
                     'courseNum' => 1,
                     'price' => 1,
-                    '_id' => 1
+                    '_id' => 1,
+                    'sellerEmail' => 1
                 ],
                 'sort' => [
                     'score' => ['$meta' => 'textScore']
@@ -116,7 +117,8 @@
                     'faculty' => 1,
                     'courseNum' => 1,
                     'price' => 1,
-                    '_id' => 1
+                    '_id' => 1,
+                    'sellerEmail' => 1
                 ],
                 'sort' => [
                     'datePosted' => -1    

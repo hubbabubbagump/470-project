@@ -134,6 +134,35 @@ body {
     text-overflow: ellipsis;
 }
 
+.msgBox {
+    margin-top: 20px;
+    float: right;
+    padding: 7px 10px 0;
+    height: 30px;
+    background-color: #A6192E;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.msgBox:hover {
+    background-color: #B64556;
+}
+
+.msgButton {
+    margin-bottom: 10px;
+    border: none;
+    padding: 7px 10px;
+    background-color: #A6192E;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.msgButton:hover {
+    background-color: #B64556;
+}
+
 .getMore {
     width: 100%;
     margin: 8px 0;
@@ -197,4 +226,9 @@ body {
 
 .modalBody div {
     padding: 5px 0;
+}
+
+textarea {
+    resize: vertical;
+    margin: 10px auto;
 }
