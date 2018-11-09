@@ -54,6 +54,7 @@ function getItems() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
         while (container.firstChild) {
@@ -74,7 +75,7 @@ function getItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -122,6 +123,7 @@ function getMore() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
 
@@ -133,7 +135,7 @@ function getMore() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -175,6 +177,7 @@ function getNewItems() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
 
@@ -194,7 +197,7 @@ function getNewItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -219,15 +222,17 @@ function getNewItems() {
     })
 }
 
-function renderItem(item, container, bColor) {
+function renderItem(item, container, bColor, loggedIn) {
     var div = document.createElement("div");
     div.style.backgroundColor = bColor;
     div.className = "itemBox";
     div.id = item._id;
 
-    var msgBox = document.createElement("div");
-    msgBox.className = "msgBox";
-    msgBox.innerText = "Message";
+    if (loggedIn) {
+        var msgBox = document.createElement("div");
+        msgBox.className = "msgBox";
+        msgBox.innerText = "Message";
+    }
 
     var title = document.createElement("p");
     title.innerText = item.title;
@@ -245,7 +250,9 @@ function renderItem(item, container, bColor) {
     description.innerText = item.desc;
     description.className = "desc";
 
-    div.appendChild(msgBox);
+    if (loggedIn) {
+        div.appendChild(msgBox);
+    }
     div.appendChild(title);
     div.appendChild(course);
     div.appendChild(price);
@@ -255,9 +262,11 @@ function renderItem(item, container, bColor) {
         openModal(item._id);
     });
 
-    msgBox.addEventListener("click", function() {
-        openMessageModal(item.sellerEmail);
-    });
+    if (loggedIn) {
+        msgBox.addEventListener("click", function() {
+            openMessageModal(item.sellerEmail);
+        });
+    }
 }
 
 var itemRequest;

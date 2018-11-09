@@ -43,11 +43,18 @@
     }
 
     function getItemsByIndex($collection, $query, $page) {
-        $scoreThreshold = 1.2;
+        $scoreThreshold = 1.1;
         $itemsPerPage = 10;
         $itemMin = ($page - 1) * $itemsPerPage;
         $itemMax = ($page * $itemsPerPage) - 1;
         $moreItems = true;
+
+        $isLoggedIn = false;
+        if (isset($_SESSION['user_id'])) {
+            $isLoggedIn = true;
+        }
+
+        $showEmail = ($isLoggedIn) ? 1 : 0;
 
         $results = array();
         $cursor = $collection->find(
@@ -97,7 +104,7 @@
             $i += 1;
          }
 
-        return json_encode(array('results' => $results, 'moreItems' => $moreItems));
+        return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
     }
 
     function getNewestItems($collection, $page) {
@@ -105,6 +112,13 @@
         $itemMin = ($page - 1) * $itemsPerPage;
         $itemMax = ($page * $itemsPerPage) - 1;
         $moreItems = true;
+
+        $isLoggedIn = false;
+        if (isset($_SESSION['user_id'])) {
+            $isLoggedIn = true;
+        }
+
+        $showEmail = ($isLoggedIn) ? 1 : 0;
 
         $results = array();
         $cursor = $collection->find(
@@ -145,6 +159,6 @@
             $i += 1;
          };
 
-         return json_encode(array('results' => $results, 'moreItems' => $moreItems));
+         return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
     }
 ?>

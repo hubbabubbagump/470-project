@@ -24,7 +24,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		session_start();
-
+	
 		if (isset($_SESSION['user_id'])) {
             $this->showLogin = FALSE;
 			$headerData['showPostItem'] = TRUE;
