@@ -264,7 +264,7 @@ function renderItem(item, container, bColor, loggedIn) {
 
     if (loggedIn) {
         msgBox.addEventListener("click", function() {
-            openMessageModal(item.sellerEmail);
+            openMessageModal(item.sellerEmail, item._id);
         });
     }
 }
@@ -312,9 +312,14 @@ function openModal(id) {
 }
 
 var currentEmail;
+var currentId;
 
-function openMessageModal(email) {
+function openMessageModal(email, id) {
+    if (id != currentId) {
+        document.getElementById("textarea").value = "";
+    }
     currentEmail = email;
+    currentId = id;
     var msgModal = document.getElementById("msgModal");
     msgModal.style.display = "block";
 }
