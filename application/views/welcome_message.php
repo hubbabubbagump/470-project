@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>470 Project</title>
 
 	<link rel="stylesheet" href="/css/header.css">
 	<link rel="stylesheet" href="/css/welcome.css">
@@ -49,6 +49,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div id="modalPrice"></div>
 					<div id="modalDesc"></div>
 					<div id="images"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="msgModal" class="modal">
+			<div id="msgModalContent" class="modalContent">
+				<div id="modalHeader" class="modalHeader"><p id="msgTitle">Message Seller</p></div>
+				<div id="msgBody" class="modalBody">
+					<textarea rows="10" cols="60" name="message" autofocus required></textarea>
+					<input id="msgButton" class="msgButton" type="submit" value="Send Message" onclick="sendMessage()"></input>
 				</div>
 			</div>
 		</div>
