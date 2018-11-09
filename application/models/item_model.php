@@ -30,21 +30,27 @@
                 ,$_POST['price']);
     	}
 
-    	public function removeItem()
+    	public function removeItem($id)
     	{
-
+            $database = new MongoDB\Client(getDBAddr());
+            return removeItemById(
+                 $database->local->saleItems
+                ,$id);
     	}
 
     	public function getItemDetailsById($id)
     	{
-             $database = new MongoDB\Client(getDBAddr());
+            $database = new MongoDB\Client(getDBAddr());
             return getItemById($database->local->saleItems, $id);
 
     	}
     	
-    	public function getItemDetailed()
+    	public function getItemsBySeller($sellerEmail)
     	{
-
+            $database = new MongoDB\Client(getDBAddr());
+            return getItemsBySellerEmail(
+                 $database->local->saleItems
+                ,$sellerEmail);
     	}
 
     	public function getAllItems()

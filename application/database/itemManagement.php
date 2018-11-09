@@ -145,4 +145,37 @@
 
          return json_encode(array('results' => $results, 'moreItems' => $moreItems));
     }
+
+    function getItemsBySellerEmail($collection, $sellerEmail)
+    {
+        if (empty($sellerEmail))
+        {
+            echo "empty seller";
+            return array();
+        }
+
+        $cursor = $collection->find(['sellerEmail'=> $sellerEmail]);
+
+        return json_encode($cursor);
+    }
+
+    // returns true if deleted successfully, false if failed
+    function removeItemById($collection, $itemId)
+    {
+        if (empty($itemId))
+        {
+            return false;
+        }
+
+        $deleted = $collection->deleteOne(['_id' => $itemId]);
+
+        if ($deleted == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 ?>
