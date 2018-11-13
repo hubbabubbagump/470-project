@@ -20,6 +20,6 @@
 
     // Add some test data
     for ($i = 0; $i < 15; $i++) {
-        insertItem($saleItems, "Example Textbook " . $i, "user@user.com" . $i, "John Doe", "CMPT", "470", "Slightly used textbook in good condition", 1);
+        insertItem($saleItems, "Example Textbook " . $i, "user@user.com" . $i, "John Doe", "CMPT", "470", "Slightly used textbook in good condition", 1, [49.270, -122.91]);
     }
 ?>

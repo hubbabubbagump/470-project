@@ -10,13 +10,7 @@
         public function __construct() {
             parent::__construct();
         }
-
-        public function getItemsFromDB($filter) {
-            $database = new MongoDB\Client(getDBAddr());
-
-            return getItemsByQuery($database->local->saleItems, $filter);
-        }
-
+        
         public function searchByIndex($text, $page) {
             $database = new MongoDB\Client(getDBAddr());
             return getItemsByIndex($database->local->saleItems, $text, $page);

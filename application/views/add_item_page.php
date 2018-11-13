@@ -5,6 +5,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="/css/login.css">
         <link rel="stylesheet" href="/css/header.css">
+
+        <!-- Leaflet -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+		integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+		crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+		integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+		crossorigin="">
+		</script>
     </head>
   	<body class= "loginContainer" id="formbody">
   		<h1>Post New Item</h1>
@@ -24,6 +33,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 			<input type="text" name="courseNum" pattern = "[0-9]{3}" placeholder="100" value="<?php echo set_value('courseNum'); ?>"/><br/>
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="Description" value="<?php echo set_value('desc'); ?>"/><br/>
+
+			<div id="addItemMap"></div>
 
 			<input class="button" type="submit" value="Post Item"/><br/>
 

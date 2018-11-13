@@ -21,6 +21,8 @@ window.onclick = function(event) {
 var searchRequest;
 var page = 1;
 var queryText;
+var leafletMap;
+var leafletMarker;
 
 function getItems() {
     var searchBox = document.getElementById("searchBox");
@@ -300,7 +302,28 @@ function openModal(id) {
             var desc = document.getElementById("modalDesc");
             desc.innerText = item.desc;
 
+            if (!leafletMap) {
+                leafletMap = L.map('itemResultMap').setView(item.location, 13);
+
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA', 
+                {
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA'
+                }).addTo(leafletMap);
+
+                leafletMarker = L.marker(item.location).addTo(leafletMap);
+            } else {
+                leafletMap.setView(item.location, 13);
+                leafletMarker.setLatLng(item.lcation);
+            }
+
             document.getElementById("modal").style.display = "block";
+
+            // have to do this after the modal is rendered
+            if (leafletMap) {
+                leafletMap.invalidateSize();
+            }
         }
         else {
             alert("Invalid item id");

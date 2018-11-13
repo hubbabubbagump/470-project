@@ -1,5 +1,25 @@
 var request;
 
+var leafletMap;
+var leaftletMarker;
+
+$(document).ready(function() {
+    leafletMap = L.map('addItemMap').setView([49.276184, -122.918719], 13);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA', 
+    {
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA'
+    }).addTo(leafletMap);
+
+    leafletMarker = L.marker([49.276184, -122.918719]).addTo(leafletMap);
+
+    leafletMap.on('click', function(event) {
+    	leafletMarker.setLatLng(event.latlng);
+    });
+});
+
 function isEmpty(str) {
     return (!str || 0 === str.length);
 }
@@ -28,11 +48,13 @@ function addItem() {
 		url: "/index.php/item/create",
 		type: "post",
 		data: {
-			 title: form['title'].value
-			,price: form['price'].value
-			,faculty: form['faculty'].value
-			,courseNum: form['courseNum'].value
-			,desc: form['desc'].value
+			title: form['title'].value,
+			price: form['price'].value,
+			faculty: form['faculty'].value,
+			courseNum: form['courseNum'].value,
+			desc: form['desc'].value/*,
+			// Coordinates as an array
+			location: leafletMarker.toGeoJSON().geometry.coordinates*/
 		}
 	});
 

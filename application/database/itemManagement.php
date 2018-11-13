@@ -2,7 +2,7 @@
     
     include_once __DIR__ . "../utilities.php";
 
-    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price): string {
+    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price, $location): string {
 
         $date = new DateTime();
         $timestamp = $date->getTimestamp() * 1000;
@@ -16,23 +16,12 @@
             '_id' => $id,
             'sellerEmail' => $sellerEmail,
             'sellerName' => $sellerName,
-            'price' => $price
+            'price' => $price,
+            'location' => $location
         ]);
         // echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
 
         return $id;
-    }
-
-    function getItemsByQuery($collection, $filter) {
-        if(empty($filter)) {
-            $cursor = $collection->find();
-        } else {
-            $cursor = $collection->find($filter);
-        }
-        $items = $cursor->toArray();
-        $result = BSONtoJSON($items);
-
-        return $result;
     }
 
     function getItemById($collection, $id) {
@@ -72,11 +61,12 @@
                     'courseNum' => 1,
                     'price' => 1,
                     '_id' => 1,
-                    'sellerEmail' => 1
+                    'sellerEmail' => 1,
+                    'location' => 1
                 ],
                 'sort' => [
                     'score' => ['$meta' => 'textScore']
-                    ]
+                ]
             ]
         );
 
@@ -132,7 +122,8 @@
                     'courseNum' => 1,
                     'price' => 1,
                     '_id' => 1,
-                    'sellerEmail' => 1
+                    'sellerEmail' => 1,
+                    'location' => 1
                 ],
                 'sort' => [
                     'datePosted' => -1    
