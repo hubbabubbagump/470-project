@@ -315,7 +315,7 @@ function openModal(id) {
                 leafletMarker = L.marker(item.location).addTo(leafletMap);
             } else {
                 leafletMap.setView(item.location, 13);
-                leafletMarker.setLatLng(item.lcation);
+                leafletMarker.setLatLng(item.location);
             }
 
             document.getElementById("modal").style.display = "block";

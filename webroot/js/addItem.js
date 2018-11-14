@@ -52,9 +52,9 @@ function addItem() {
 			price: form['price'].value,
 			faculty: form['faculty'].value,
 			courseNum: form['courseNum'].value,
-			desc: form['desc'].value/*,
-			// Coordinates as an array
-			location: leafletMarker.toGeoJSON().geometry.coordinates*/
+			desc: form['desc'].value,
+			// mongoDB stores geo coordinates as long, lat so we have to reverse it here
+			location: leafletMarker.toGeoJSON().geometry.coordinates.reverse()
 		}
 	});
 
