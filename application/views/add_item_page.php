@@ -17,20 +17,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
     </head>
   	<body class= "loginContainer" id="formbody">
   		<h1>Post New Item</h1>
-  		<div class="addpost">
+  		<div class="additem">
 		<?php echo validation_errors(); ?>
-		<form onsubmit="event.preventDefault(); return addItem()" name="addItemForm" >
+		<form onsubmit="event.preventDefault(); return addItem()" name="addItemForm">
 			<fieldset>
-			<label><b>Title</b></label><br/>
+			<label class="required"><b>Title</b></label><br/>
 			<input type="text" name="title" placeholder="Title" value="<?php echo set_value('title'); ?>"/><br/>
 
-			<label><b>Price</b></label><br/>
+			<label class="required"><b>Price</b></label><br/>
 			<input type="number" name="price" min="0" step="any" placeholder="20.00" value="<?php echo set_value('price'); ?>"/><br/> <!--how to display CAD or $ before entry? -->
-			<label><b>Faculty</b></label><br/> <!-- four alphabets / or from a drop down list-->
+			
+			<label class="required"><b>Faculty</b></label><br/> <!-- 2+ alphabets / or from a drop down list-->
 			<input type="text" name="faculty" pattern="[A-Za-z]{2,}" placeholder="CMPT" value="<?php echo set_value('faculty'); ?>"/><br/>
 
-			<label><b>Course Number</b></label><br/>
+			<label class="required"><b>Course Number</b></label><br/>
 			<input type="text" name="courseNum" pattern = "[0-9]{3}" placeholder="100" value="<?php echo set_value('courseNum'); ?>"/><br/>
+			
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="Description" value="<?php echo set_value('desc'); ?>"/><br/>
 

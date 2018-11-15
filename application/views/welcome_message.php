@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="msgModalContent" class="modalContent">
 				<div id="modalHeader" class="modalHeader"><p id="msgTitle">Message Seller</p></div>
 				<div id="msgBody" class="modalBody">
-					<textarea id="textarea" rows="10" cols="60" name="message" autofocus required></textarea>
+					<textarea id="textarea" rows="10" cols="73" name="message" autofocus required></textarea>
 					<input id="msgButton" class="msgButton" type="submit" value="Send Message" onclick="sendMessage()"></input>
 				</div>
 			</div>

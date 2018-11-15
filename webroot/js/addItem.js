@@ -59,18 +59,12 @@ function addItem() {
 	});
 
 	request.done(function (response){
-		window.location.href = "/"; //change to show post
 		alert("Item created")
-		//form.style.visibility = "hidden";
-		//$("#formbody").html(response);
-		//location.replace("/add_item_sucess_page");
-		// $("html").html(response);
-		//$("html").innerText = response;
-		//$("html").html($("html", response).html()); 
+		form.reset(); 
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
-		window.alert("Error: " + textStatus, errorThrown);
+		console.log("Error: " + textStatus, errorThrown);
 	});
 
 	return false;

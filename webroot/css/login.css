@@ -8,6 +8,11 @@ input[type=text], input[type=password], input[type=email], input[type=textbox], 
     border-radius: 2px;
 }
 
+.required:before {
+    content: "*";
+    color: red;
+}
+
 .loginContainer label {
     font-size: 16px;
 }
@@ -73,6 +78,13 @@ h1 {
     color: #54585A;
 }
 
+.loginContainer .additem {
+    max-width: 500px;
+    padding: 30px;
+    margin: 0px auto;
+    color: #54585A;
+}
+
 .loginContainer {
     width: 100%;
     background-color: #F5F5F5;
@@ -84,7 +96,7 @@ h1 {
 }
 
 #addItemMap {
-    max-width: 300px;
+    max-width: 500px;
     height: 300px;
     padding: 0px 10px;
 }
