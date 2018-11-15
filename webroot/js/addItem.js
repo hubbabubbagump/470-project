@@ -53,6 +53,7 @@ function addItem() {
 			faculty: form['faculty'].value,
 			courseNum: form['courseNum'].value,
 			desc: form['desc'].value,
+			imgs: imageUrls,
 			// mongoDB stores geo coordinates as long, lat so we have to reverse it here
 			location: leafletMarker.toGeoJSON().geometry.coordinates.reverse()
 		}
@@ -60,7 +61,7 @@ function addItem() {
 
 	request.done(function (response){
 		alert("Item created")
-		form.reset(); 
+		location.reload();
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -69,3 +70,17 @@ function addItem() {
 
 	return false;
 }
+
+var imageUrls = [];
+
+cloudinary.applyUploadWidget('#imageWidget', {
+		cloudName: 'dkgnnu4oh', 
+		uploadPreset: 'preset1', 
+		sources: ['local']
+	},
+	(error, result) => {
+		if (result && result.event === "success") {
+			imageUrls.push(result.info.url);
+		}
+	}
+)

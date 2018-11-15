@@ -28,7 +28,8 @@
                 $_POST['courseNum'],
                 $_POST['desc'],
                 $_POST['price'],
-                $_POST['location']
+				$_POST['location'],
+				$_POST['imgs']
             );
     	}
 

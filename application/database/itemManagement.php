@@ -2,7 +2,7 @@
     
     include_once __DIR__ . "../utilities.php";
 
-    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price, $location): string {
+    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price, $location, $images): string {
 
         $date = new DateTime();
         $timestamp = $date->getTimestamp() * 1000;
@@ -17,7 +17,8 @@
             'sellerEmail' => $sellerEmail,
             'sellerName' => $sellerName,
             'price' => $price,
-            'location' => $location
+            'location' => $location,
+            'images' => $images
         ]);
         // echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
 

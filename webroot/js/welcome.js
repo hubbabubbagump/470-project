@@ -302,6 +302,48 @@ function openModal(id) {
             var desc = document.getElementById("modalDesc");
             desc.innerText = item.desc;
 
+            var imageContainer = document.getElementById("images");
+            var images = item.images;
+            while (imageContainer.firstChild) {
+                imageContainer.removeChild(imageContainer.firstChild);
+            }
+
+            if (images.length > 0) {
+                slideIndex = 1;
+                document.getElementById("imageLine").style.display = "block";
+    
+                for (let i = 0; i < images.length; i++) {
+                    let image = document.createElement("img");
+                    image.className = "imageSlide";
+                    image.src = images[i];
+                    imageContainer.appendChild(image);
+                }
+
+                if (images.length > 1){
+                    var leftButton = document.createElement("a");
+                    leftButton.className = "image-button image-button-left";
+                    leftButton.innerText = '\u276E';
+                    leftButton.addEventListener('click', function() {
+                        plusDivs(-1);
+                    });
+
+                    var rightButton = document.createElement("a");
+                    rightButton.className = "image-button image-button-right";
+                    rightButton.innerText = '\u276F';
+                    rightButton.addEventListener('click', function() {
+                        plusDivs(+1);
+                    })
+
+                    imageContainer.appendChild(leftButton);
+                    imageContainer.appendChild(rightButton);
+                }
+
+                showDivs(0);
+            }
+            else {
+                document.getElementById("imageLine").style.display = "none";
+            }
+
             if (!leafletMap) {
                 leafletMap = L.map('itemResultMap').setView(item.location, 13);
 
@@ -332,6 +374,27 @@ function openModal(id) {
 
     itemRequest.fail(function(jqXHR, textStatus, errorThrown) {
     });
+}
+
+var slideIndex = 1
+
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+    var i;
+    var images = document.getElementsByClassName("imageSlide");
+    if (n > images.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = images.length;
+    }
+    for(i = 0; i < images.length; i++) {
+        images[i].style.display = "none";
+    }
+    images[slideIndex - 1].style.display = "block";
 }
 
 var currentEmail;

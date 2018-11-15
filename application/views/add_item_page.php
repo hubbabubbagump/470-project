@@ -14,6 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 		integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
 		crossorigin="">
 		</script>
+		<script src="/node_modules/lodash/lodash.js" type="text/javascript"></script>
+		<script src="/node_modules/cloudinary-core/cloudinary-core.js" type="text/javascript"></script>
+		<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">></script>
     </head>
   	<body class= "loginContainer" id="formbody">
   		<h1>Post New Item</h1>
@@ -35,6 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 			
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="Description" value="<?php echo set_value('desc'); ?>"/><br/>
+
+			<div id="imageWidget">Upload image</div>
 
 			<div id="addItemMap"></div>
 

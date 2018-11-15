@@ -6,9 +6,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>470 Project</title>
 
+	<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
 	<link rel="stylesheet" href="/css/header.css">
 	<link rel="stylesheet" href="/css/welcome.css">
 	<link rel="stylesheet" href="/css/loading.css">
+
 	<script type='text/javascript' src="/js/header.js"></script>
 	<!-- Leaflet -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
@@ -56,7 +59,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div id="modalCourse"></div>
 					<div id="modalPrice"></div>
 					<div id="modalDesc"></div>
+					<hr id="imageLine">
 					<div id="images"></div>
+					<hr>
 					<div id="itemResultMap"></div>
 				</div>
 			</div>
