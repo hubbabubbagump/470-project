@@ -21,6 +21,8 @@ window.onclick = function(event) {
 var searchRequest;
 var page = 1;
 var queryText;
+var leafletMap;
+var leafletMarker;
 
 function getItems() {
     var searchBox = document.getElementById("searchBox");
@@ -54,6 +56,7 @@ function getItems() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
         while (container.firstChild) {
@@ -74,7 +77,7 @@ function getItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -122,6 +125,7 @@ function getMore() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
 
@@ -133,7 +137,7 @@ function getMore() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -175,6 +179,7 @@ function getNewItems() {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
+        var loggedIn = jsonResponse.isAuthenticated;
 
         var container = document.getElementById("itemList");
 
@@ -194,7 +199,7 @@ function getNewItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor);
+                    renderItem(item, container, bColor, loggedIn);
                 }
             }
             
@@ -219,15 +224,17 @@ function getNewItems() {
     })
 }
 
-function renderItem(item, container, bColor) {
+function renderItem(item, container, bColor, loggedIn) {
     var div = document.createElement("div");
     div.style.backgroundColor = bColor;
     div.className = "itemBox";
     div.id = item._id;
 
-    var msgBox = document.createElement("div");
-    msgBox.className = "msgBox";
-    msgBox.innerText = "Message";
+    if (loggedIn) {
+        var msgBox = document.createElement("div");
+        msgBox.className = "msgBox";
+        msgBox.innerText = "Message";
+    }
 
     var title = document.createElement("p");
     title.innerText = item.title;
@@ -245,7 +252,9 @@ function renderItem(item, container, bColor) {
     description.innerText = item.desc;
     description.className = "desc";
 
-    div.appendChild(msgBox);
+    if (loggedIn) {
+        div.appendChild(msgBox);
+    }
     div.appendChild(title);
     div.appendChild(course);
     div.appendChild(price);
@@ -255,9 +264,11 @@ function renderItem(item, container, bColor) {
         openModal(item._id);
     });
 
-    msgBox.addEventListener("click", function() {
-        openMessageModal(item.sellerEmail);
-    });
+    if (loggedIn) {
+        msgBox.addEventListener("click", function() {
+            openMessageModal(item.sellerEmail, item._id);
+        });
+    }
 }
 
 var itemRequest;
@@ -291,7 +302,70 @@ function openModal(id) {
             var desc = document.getElementById("modalDesc");
             desc.innerText = item.desc;
 
+            var imageContainer = document.getElementById("images");
+            var images = item.images;
+            while (imageContainer.firstChild) {
+                imageContainer.removeChild(imageContainer.firstChild);
+            }
+
+            if (images.length > 0) {
+                slideIndex = 1;
+                document.getElementById("imageLine").style.display = "block";
+    
+                for (let i = 0; i < images.length; i++) {
+                    let image = document.createElement("img");
+                    image.className = "imageSlide";
+                    image.src = images[i];
+                    imageContainer.appendChild(image);
+                }
+
+                if (images.length > 1){
+                    var leftButton = document.createElement("a");
+                    leftButton.className = "image-button image-button-left";
+                    leftButton.innerText = '\u276E';
+                    leftButton.addEventListener('click', function() {
+                        plusDivs(-1);
+                    });
+
+                    var rightButton = document.createElement("a");
+                    rightButton.className = "image-button image-button-right";
+                    rightButton.innerText = '\u276F';
+                    rightButton.addEventListener('click', function() {
+                        plusDivs(+1);
+                    })
+
+                    imageContainer.appendChild(leftButton);
+                    imageContainer.appendChild(rightButton);
+                }
+
+                showDivs(0);
+            }
+            else {
+                document.getElementById("imageLine").style.display = "none";
+            }
+
+            if (!leafletMap) {
+                leafletMap = L.map('itemResultMap').setView(item.location, 13);
+
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA', 
+                {
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA'
+                }).addTo(leafletMap);
+
+                leafletMarker = L.marker(item.location).addTo(leafletMap);
+            } else {
+                leafletMap.setView(item.location, 13);
+                leafletMarker.setLatLng(item.location);
+            }
+
             document.getElementById("modal").style.display = "block";
+
+            // have to do this after the modal is rendered
+            if (leafletMap) {
+                leafletMap.invalidateSize();
+            }
         }
         else {
             alert("Invalid item id");
@@ -302,10 +376,36 @@ function openModal(id) {
     });
 }
 
-var currentEmail;
+var slideIndex = 1
 
-function openMessageModal(email) {
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+    var i;
+    var images = document.getElementsByClassName("imageSlide");
+    if (n > images.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = images.length;
+    }
+    for(i = 0; i < images.length; i++) {
+        images[i].style.display = "none";
+    }
+    images[slideIndex - 1].style.display = "block";
+}
+
+var currentEmail;
+var currentId;
+
+function openMessageModal(email, id) {
+    if (id != currentId) {
+        document.getElementById("textarea").value = "";
+    }
     currentEmail = email;
+    currentId = id;
     var msgModal = document.getElementById("msgModal");
     msgModal.style.display = "block";
 }

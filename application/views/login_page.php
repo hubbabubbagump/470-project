@@ -20,14 +20,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
                 <form name="loginForm" onsubmit="event.preventDefault(); return checkSubmit()">
                     <p>
-                        <label><b>Email</b></label>
+                        <label class="required"><b>Email</b></label>
                         <br>
                         <input autofocus id="email" type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
                         <br>
                     </p>
 
                     <p>
-                        <label><b>Password</b></label>
+                        <label class="required"><b>Password</b></label>
                         <br>
                         <input type="password" name="password" placeholder="Enter Password"/>
                         <br>

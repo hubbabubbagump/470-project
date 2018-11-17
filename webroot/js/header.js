@@ -19,7 +19,3 @@ function openLogout() {
 function openPostItem() {
 	window.location.href = "/Item";
 }
-
-function openSearch() {
-	window.location.href = "/search/test";	
-}

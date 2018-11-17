@@ -11,37 +11,6 @@ class Search extends CI_Controller {
 		$this->load->model('search_model');
 	}
 
-	public function test($page = 'home') {
-		if (isset($_SESSION['user_id'])) {
-            $this->showLogin = FALSE;
-		}
-
-		$headerData['showLogin'] = $this->showLogin;
-		$headerData['showPostItem'] = FALSE;
-		$data['title'] = ucfirst($page);
-
-		$this->load->view('header', $headerData);
-		$this->load->view('search');
-	}
-
-	public function getItems() {
-		// TODO: do some form validation here
-
-		$postData = $this->input->post(NULL, FALSE);
-		$filter = array();
-
-		foreach($postData as $key => $value) {
-			if (!empty($value)) {
-				$filter[$key] = array('$regex' => $value);
-			}
-		}
-
-		//$data['items'] = var_dump($filter);
-		$data['items'] = $this->search_model->getItemsFromDB($filter);
-
-		$this->load->view('search/search_results', $data);
-	}
-
 	//Searches using a full text search
 	public function search() {
 		$query = $_GET['search'];

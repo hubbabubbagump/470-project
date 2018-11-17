@@ -19,21 +19,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
                 <form onsubmit="event.preventDefault(); return checkSubmit()" name="registrationForm">
                     <p>
-                        <label><b>Name</b></label>
+                        <label class="required"><b>Name</b></label>
                         <br>
                         <input autofocus type="text" name="name" placeholder="Enter Name" value="<?php echo $name; ?>"/>
                         <br>
                     </p> 
 
                     <p>
-                        <label><b>Email</b></label>
+                        <label class="required"><b>Email</b></label>
                         <br>
                         <input type="email" name="email" placeholder="Enter Email" value="<?php echo $email; ?>"/>
                         <br>
                     </p>
 
                     <p>
-                        <label><b>Password</b></label>
+                        <label class="required"><b>Password</b></label>
                         <br>
                         <input type="password" name="password" placeholder="Enter Password"/>
                         <br>

@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="header">
         <div class="labelContainer"><label onclick="openHome()">470 Project</label></div>  
         <div class="loginregister">
-            <div class="buttonContainer" onclick="openSearch()"><p class="navigate" id="search">Search Items</p></div>
         <?php if ($showLogin): ?>
             <div class="buttonContainer" onclick="openLogin()"><p class="navigate login" id="login">Login</p></div>
             <div class="buttonContainer" onclick="openRegister()"><p class="navigate register"id="register">Register</p></div>

@@ -20,14 +20,17 @@
 			$database = new MongoDB\Client(getDBAddr());
 			$name = getUserName($database->local->users, $sellerEmail);
             return insertItem(
-                 $database->local->saleItems
-                ,$_POST['title']
-				,$sellerEmail
-				,$name
-                ,$_POST['faculty']
-                ,$_POST['courseNum']
-                ,$_POST['desc']
-                ,$_POST['price']);
+                $database->local->saleItems,
+                $_POST['title'],
+                $sellerEmail,
+                $name,
+                $_POST['faculty'],
+                $_POST['courseNum'],
+                $_POST['desc'],
+                $_POST['price'],
+				$_POST['location'],
+				$_POST['imgs']
+            );
     	}
 
     	public function removeItem($id)

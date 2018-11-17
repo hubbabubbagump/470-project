@@ -2,7 +2,7 @@
     
     include_once __DIR__ . "../utilities.php";
 
-    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price): string {
+    function insertItem ($collection, $title, $sellerEmail, string $sellerName, string $faculty, string $courseNum, string $desc, $price, $location, $images): string {
 
         $date = new DateTime();
         $timestamp = $date->getTimestamp() * 1000;
@@ -16,23 +16,13 @@
             '_id' => $id,
             'sellerEmail' => $sellerEmail,
             'sellerName' => $sellerName,
-            'price' => $price
+            'price' => $price,
+            'location' => $location,
+            'images' => $images
         ]);
         // echo "[" . $collection->getCollectionName() . "] Inserted new sales item with id: " . $result->getInsertedId() . "\n"; 
 
         return $id;
-    }
-
-    function getItemsByQuery($collection, $filter) {
-        if(empty($filter)) {
-            $cursor = $collection->find();
-        } else {
-            $cursor = $collection->find($filter);
-        }
-        $items = $cursor->toArray();
-        $result = BSONtoJSON($items);
-
-        return $result;
     }
 
     function getItemById($collection, $id) {
@@ -43,11 +33,18 @@
     }
 
     function getItemsByIndex($collection, $query, $page) {
-        $scoreThreshold = 1.2;
+        $scoreThreshold = 1.1;
         $itemsPerPage = 10;
         $itemMin = ($page - 1) * $itemsPerPage;
         $itemMax = ($page * $itemsPerPage) - 1;
         $moreItems = true;
+
+        $isLoggedIn = false;
+        if (isset($_SESSION['user_id'])) {
+            $isLoggedIn = true;
+        }
+
+        $showEmail = ($isLoggedIn) ? 1 : 0;
 
         $results = array();
         $cursor = $collection->find(
@@ -65,11 +62,12 @@
                     'courseNum' => 1,
                     'price' => 1,
                     '_id' => 1,
-                    'sellerEmail' => 1
+                    'sellerEmail' => 1,
+                    'location' => 1
                 ],
                 'sort' => [
                     'score' => ['$meta' => 'textScore']
-                    ]
+                ]
             ]
         );
 
@@ -97,7 +95,7 @@
             $i += 1;
          }
 
-        return json_encode(array('results' => $results, 'moreItems' => $moreItems));
+        return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
     }
 
     function getNewestItems($collection, $page) {
@@ -105,6 +103,13 @@
         $itemMin = ($page - 1) * $itemsPerPage;
         $itemMax = ($page * $itemsPerPage) - 1;
         $moreItems = true;
+
+        $isLoggedIn = false;
+        if (isset($_SESSION['user_id'])) {
+            $isLoggedIn = true;
+        }
+
+        $showEmail = ($isLoggedIn) ? 1 : 0;
 
         $results = array();
         $cursor = $collection->find(
@@ -118,7 +123,8 @@
                     'courseNum' => 1,
                     'price' => 1,
                     '_id' => 1,
-                    'sellerEmail' => 1
+                    'sellerEmail' => 1,
+                    'location' => 1
                 ],
                 'sort' => [
                     'datePosted' => -1    
@@ -145,7 +151,7 @@
             $i += 1;
          };
 
-         return json_encode(array('results' => $results, 'moreItems' => $moreItems));
+         return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
     }
 
     function getItemsBySellerEmail($collection, $sellerEmail)
