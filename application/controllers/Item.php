@@ -88,7 +88,7 @@
 			}
 			else
 			{
-				header('HTTP/2 <enter code> Invalid Item');
+				header('HTTP/2 401 Invalid Item');
 				die(json_encode(array('message' => 'Invalid Item')));
 			}
 		}
@@ -102,7 +102,7 @@
 			}
 			else
 			{
-				header('HTTP/2 <enter code> Invalid Item');
+				header('HTTP/2 401 Invalid Item');
 				die(json_encode(array('message' => 'Invalid Item')));
 			}
 

@@ -20,10 +20,10 @@
 			$name = getUserName($database->local->users, $sellerEmail);
             return insertItem(
                 $database->local->saleItems,
-                $_POST['title'],
+                ucwords($_POST['title']),
                 $sellerEmail,
                 $name,
-                $_POST['faculty'],
+                strtoupper($_POST['faculty']),
                 $_POST['courseNum'],
                 $_POST['desc'],
                 $_POST['price'],
@@ -61,9 +61,11 @@
             return editExistingItem(
                 $database->local->saleItems,
                 $_POST['id'],
-                $_POST['title'],
-                $_POST['faculty'],
-                $_POST['courseNum']
+                ucwords($_POST['title']),
+                strtoupper($_POST['faculty']),
+                $_POST['courseNum'],
+                $_POST['price'],
+                $_POST['desc']
             );
         }
     }

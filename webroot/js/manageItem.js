@@ -58,7 +58,15 @@ function createItemSection(item) {
 	courseNum.className = "itemCourseNum";
 	courseNum.innerHTML = item.courseNum;
 
-	// you can add other information here
+	var price = document.createElement("div");
+	price.className = "itemPrice";
+	price.innerHTML = "$"+item.price;
+
+	var desc = document.createElement("div");
+	desc.className = "itemDesc";
+	desc.innerHTML = item.desc;
+
+	// add location and image later
 
 	var deleteButton = document.createElement("input");
 	deleteButton.type = "button";
@@ -71,13 +79,15 @@ function createItemSection(item) {
 	editButton.value = "Edit This Item";
 	editButton.className = "itemEdit";
 	editButton.onclick = showEdit.bind(item);
-	
+
 	container.appendChild(title);
 	container.appendChild(date);
 	container.appendChild(faculty);
 	container.appendChild(courseNum);
-	container.appendChild(deleteButton);
+	container.appendChild(price);
+	container.appendChild(desc);
 	container.appendChild(editButton);
+	container.appendChild(deleteButton);
 
 	itemDiv.appendChild(container);
 }
@@ -138,6 +148,10 @@ function showEdit()
 	newTitle.type = "text";
    	newTitle.name= 'title';
     newTitle.value= this.title;
+    newTitle.style['font-size'] = '15px';
+    newTitle.style['color'] = '#54585A';
+    newTitle.style['font-weight'] = 'normal'; 
+
 
     var newFaculty = document.createElement("input");
     newFaculty.className = 'itemFaculty';
@@ -146,6 +160,8 @@ function showEdit()
    	newFaculty.name= 'faculty';
     newFaculty.value= this.faculty;
     newFaculty.pattern = "[A-Za-z]{2,}";
+    newFaculty.style['font-weight'] = 'normal';
+    newFaculty.style['color'] = '#54585A';
 
 	var newCourseNum = document.createElement("input");
     newCourseNum.className = 'itemCourseNum';
@@ -155,19 +171,42 @@ function showEdit()
     newCourseNum.value= this.courseNum;
     newCourseNum.pattern= "[0-9]{3}";
 
+    newCourseNum.style['font-weight'] = 'normal';
+    newCourseNum.style['color'] = '#54585A';
+
+    var newPrice = document.createElement("input");
+    newPrice.className = 'itemPrice';
+    newPrice.id = 'itemPrice_'+id;
+    newPrice.type = 'number';
+    newPrice.min = 0;
+    newPrice.value = this.price;
+
+    newPrice.style['font-weight'] = 'normal';
+    newPrice.style['color'] = '#54585A';
+
+    var newDesc = document.createElement("input");
+    newDesc.className = 'itemDesc';
+    newDesc.id = 'itemDesc_'+id;
+    newDesc.type = 'textbox';
+    newDesc.value = this.desc;
+
+
     $("#"+id+" .itemTitle").replaceWith(newTitle);
     $("#"+id+" .itemFaculty").replaceWith(newFaculty);
     $("#"+id+" .itemCourseNum").replaceWith(newCourseNum);
-
+    $("#"+id+" .itemPrice").replaceWith(newPrice);
+    $("#"+id+" .itemDesc").replaceWith(newDesc);
+    $("#"+id+" .itemDatePosted").hide();
 
     var saveButton = document.createElement("input");
+	saveButton.className = 'itemSave';
 	saveButton.type = "button";
 	saveButton.value = "Save Changes";
+
 	item = $(this);
 	saveButton.onclick = sendEdit.bind(this._id);
 	
 	$("#"+id+" .itemEdit").replaceWith(saveButton);
-
 }
 
 function sendEdit()
@@ -177,13 +216,16 @@ function sendEdit()
 	var title = document.getElementById('itemTitle_'+id);
 	var faculty = document.getElementById('itemFaculty_'+id);
 	var courseNum = document.getElementById('itemCourseNum_'+id);
+	var price = document.getElementById('itemPrice_'+id);
+	var desc = document.getElementById('itemDesc_'+id);
 	var infoSection = document.getElementById("info");
 
-	//var er = "saving Changes for title: "+ title.value;
-	//window.alert(er);
 
 	if (request) {
 		request.abort();
+	}
+	if (desc.value == undefined) {
+		desc.value = "";
 	}
 
 	request = $.ajax({
@@ -193,14 +235,15 @@ function sendEdit()
 			id: id,
 			title: title.value,
 			faculty:faculty.value,
-			courseNum: courseNum.value
+			courseNum: courseNum.value,
+			price: price.value,
+			desc: desc.value
 		}
 	});
 
 	request.done(function(response, textStatus, jqXHR) {
-		showPopup("Item edited Successfully");
 		location.reload();
-
+		showPopup('Item Edited Successfully');
 	});
 
 	request.fail(function(jqXHR, textStatus, errorThrown) {

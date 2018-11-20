@@ -188,7 +188,7 @@
         }
     }
 
-    function editExistingItem($collection, $id, $title, $faculty, $courseNum)
+    function editExistingItem($collection, $id, $title, $faculty, $courseNum, $price, $desc)
     {
         
         $updateResult = $collection->updateOne(
@@ -196,20 +196,20 @@
             ['$set' =>
                 [   'title' => $title,
                     'faculty' => $faculty,
-                    'courseNum' => $courseNum
+                    'courseNum' => $courseNum,
+                    'price' => $price,
+                    'desc' => $desc
                 ]
             ]
         );
-
-        //echo "Matched ".$updateResult->getMatchedCount()." document(s)\n";
-        //echo "Modified ".$updateResult->getModifiedCount()." document(s)\n";
-        if ($updateResult->getModifiedCount() == 1)
+        //echo "modified count ".$updateResult.getModifiedCount();
+        if ($updateResult->getMatchedCount() == 0)
         {
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }
     }
 ?>
