@@ -4,8 +4,6 @@ var participants;
 var conversation;
 var targetEmail;
 
-debugger;
-
 function getContacts() {
 	var list = [];
 
