@@ -70,8 +70,8 @@ function createItemSection(item) {
 	editButton.type = "button";
 	editButton.value = "Edit This Item";
 	editButton.className = "itemEdit";
-	editButton.onclick = showEdit.bind(item);//{'id': item._id, 'title': item.title, 'faculty': item.faculty, 'courseNum': item.courseNum});
-
+	editButton.onclick = showEdit.bind(item);
+	
 	container.appendChild(title);
 	container.appendChild(date);
 	container.appendChild(faculty);
