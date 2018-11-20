@@ -17,9 +17,9 @@ function openLogout() {
 }
 
 function openPostItem() {
-	window.location.href = "/Item/index";
+	window.location.href = "/Item";
 }
 
-function openManageItems() {
-	window.location.href = "/Item/manage";
+function openMessages() {
+    window.location.href = "/Message"
 }
