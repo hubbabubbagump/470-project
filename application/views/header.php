@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="buttonContainer" onclick="openPostItem()"><button class="navigate" id="addItem">Post New Item</button></div>
             <?php endif;?>
 
+            <div class="buttonContainer" onclick="openMessages()"><button class="navigate" id="messages">Messages</button></div>
             <div class="buttonContainer" onclick="openLogout()"><button class="navigate" id="logout">Logout</button></div>
         <?php endif; ?>
         </div>
