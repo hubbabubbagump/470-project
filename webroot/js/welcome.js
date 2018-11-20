@@ -308,7 +308,7 @@ function openModal(id) {
                 imageContainer.removeChild(imageContainer.firstChild);
             }
 
-            if (images.length > 0) {
+            if (images != null && images.length > 0) {
                 slideIndex = 1;
                 document.getElementById("imageLine").style.display = "block";
     
