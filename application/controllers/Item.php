@@ -27,6 +27,7 @@
 			// load view of form
 			$this->load->view('header', $this->headerData);
 			$this->load->view('add_item_page');
+			$this->load->view('footer');
 		}
     
 

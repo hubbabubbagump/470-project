@@ -23,3 +23,7 @@ function openPostItem() {
 function openMessages() {
     window.location.href = "/Message";
 }   
+
+function openManageItems() {
+    window.location.href = "/Item/manage";
+}
