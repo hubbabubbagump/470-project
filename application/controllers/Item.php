@@ -66,17 +66,6 @@
 			echo $this->remove($_POST['id']);
 		}
 
-		public function showEditForm() 
-		{
-			$data['id'] = $_POST['id'];
-			$data['title'] = $_POST['title'];
-			$data['faculty'] = $_POST['faculty'];
-			$data['courseNum'] = $_POST['courseNum'];
-
-			$this->load->view('header', $this->headerData);
-			$this->load->view('edit_item_page', $data);
-		}
-
 		public function editItem()
 		{
 			echo $this->edit();
@@ -118,9 +107,6 @@
 			}
 
 		}
-
-
-
 
 	}
 ?>
