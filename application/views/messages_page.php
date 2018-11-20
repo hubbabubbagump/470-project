@@ -18,13 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="/css/header.css">-->
 	</head>
 	
-	<body class= "loginContainer">
+	<body class="loginContainer" onload="getContacts()">
   		<h1>Messages</h1>
-  		<!--<div class="messageList">-->
-			Should be stuff here, be patient :)
-			<!--<div class="button" onclick="getContacts()"><p id="searchText" class="searchText">Get Contacts</p></div>-->
-
-			<div class="button" onclick="getContacts()">Get Contacts</div>
+			<!--<div class="button" onclick="getContacts()">Get Contacts</div>-->
 
 			<div id="test">
 			</div>
