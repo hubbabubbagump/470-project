@@ -7,6 +7,8 @@ var targetEmail;
 debugger;
 
 function getContacts() {
+	var list = [];
+
     participants = $.ajax({
 		url: "/index.php/message/get",
 		type: "get"
@@ -25,7 +27,17 @@ function getContacts() {
     			var contacts = jsonData.participants[i];
 				//console.log(contacts.recipientEmail);
 				
-				$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.recipientEmail + "\')\" value=\" " + contacts.recipientEmail + " \">" + contacts.recipientEmail + "</a>");
+				if (contacts.hasOwnProperty('recipientEmail')) {
+					if ($.inArray(contacts.recipientEmail, list) == -1) {
+						list.push(contacts.recipientEmail);
+						$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.recipientEmail + "\')\" value=\" " + contacts.recipientEmail + " \">" + contacts.recipientEmail + "</a>");
+					}
+				} else {
+					if ($.inArray(contacts.senderEmail, list) == -1) {
+						list.push(contacts.senderEmail);
+						$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.senderEmail + "\')\" value=\" " + contacts.senderEmail + " \">" + contacts.senderEmail + "</a>");
+					}	
+				}
 			}
 		}
     });
