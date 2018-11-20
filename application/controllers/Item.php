@@ -2,28 +2,32 @@
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	class Item extends CI_Controller 
 	{
+		private $headerData = array();
+
 		public function __construct()
 		{
 			parent::__construct();
 			session_start();
 
 			if(isset($_SESSION['user_id'])) {
-				$headerData['showLogin'] = FALSE;
-				$headerData['showPostItem'] = FALSE;
+				$this->headerData['showLogin'] = FALSE;
+				$this->headerData['showPostItem'] = TRUE;
 				
 				$this->load->model('item_model');
+				$this->load->model('search_model');
 
 				$this->load->helper('form');
 				$this->load->library('form_validation');
 				$this->load->helper('url');
-				// load view of form
-				$this->load->view('header', $headerData);
-				$this->load->view('add_item_page');
 			}
 		}
 		
 		public function index() 
-		{}
+		{
+			// load view of form
+			$this->load->view('header', $this->headerData);
+			$this->load->view('add_item_page');
+		}
     
 
 		public function create()
@@ -47,11 +51,27 @@
 			}
 		}
 
-		public function getItemsOwnedByCurrentUser()
+		public function manage() {
+			$this->load->view('header', $this->headerData);
+			$this->load->view('manage_item_page');
+		}
+
+		// endpoint for getItemsOwnedByCurrentUser
+		public function getCurr() {
+			echo $this->getItemsOwnedByCurrentUser();
+		}
+
+		// endpoint for remove
+		public function removeItem() {
+			echo $this->remove($_POST['id']);
+		}
+
+		// returns a JSON string
+		private function getItemsOwnedByCurrentUser()
 		{
 			$sellerEmail = $_SESSION['user_id']; 
 			$items = $this->item_model->getItemsBySeller($sellerEmail);
-			echo $items;
+			return $items;
 		}
 
 		private function remove($id)

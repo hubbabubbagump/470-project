@@ -163,8 +163,9 @@
         }
 
         $cursor = $collection->find(['sellerEmail'=> $sellerEmail]);
+        $items = $cursor->toArray();
 
-        return json_encode($cursor);
+        return BSONtoJSON($items);
     }
 
     // returns true if deleted successfully, false if failed
@@ -175,9 +176,9 @@
             return false;
         }
 
-        $deleted = $collection->deleteOne(['_id' => $itemId]);
+        $deletedObj = $collection->deleteOne(['_id' => $itemId]);
 
-        if ($deleted == 1)
+        if ($deletedObj->getDeletedCount() == 1)
         {
             return true;
         }

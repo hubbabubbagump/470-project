@@ -16,7 +16,7 @@
             return getItemsByIndex($database->local->saleItems, $text, $page);
         }
 
-        public  function getNewest($page) {
+        public function getNewest($page) {
             $database = new MongoDB\Client(getDBAddr());
             return getNewestItems($database->local->saleItems, $page);
         }

@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="buttonContainer" onclick="openRegister()"><p class="navigate register"id="register">Register</p></div>
         <?php else: ?>
             <?php if ($showPostItem): ?>
+                <div class="buttonContainer" onclick="openManageItems()"><button class="navigate" id="manageItems">Manage Items</button></div>
                 <div class="buttonContainer" onclick="openPostItem()"><button class="navigate" id="addItem">Post New Item</button></div>
             <?php endif;?>
 

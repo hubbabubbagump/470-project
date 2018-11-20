@@ -3,9 +3,8 @@
 
     require_once DATABASE . "settings.php";
     require_once DATABASE . "userManagement.php";
-    require_once __DIR__ . '/../vendor/autoload.php';
 	require_once DATABASE . "itemManagement.php";
-	require_once DATABASE . "userManagement.php";
+    require_once __DIR__ . '/../vendor/autoload.php';
 
     class Item_model extends CI_model
     {
