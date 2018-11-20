@@ -50,21 +50,34 @@ function createItemSection(item) {
 	date.className = "itemDatePosted";
 	date.innerHTML = convertUNIXtoDateString(item.datePosted);
 
-	var course = document.createElement("div");
-	course.className = "itemCourse";
-	course.innerHTML = item.faculty + item.courseNum;
+	var faculty = document.createElement("div");
+	faculty.className = "itemFaculty";
+	faculty.innerHTML = item.faculty;
+
+	var courseNum = document.createElement("div");
+	courseNum.className = "itemCourseNum";
+	courseNum.innerHTML = item.courseNum;
 
 	// you can add other information here
 
 	var deleteButton = document.createElement("input");
 	deleteButton.type = "button";
 	deleteButton.value = "Delete This Item";
+	deleteButton.className = "itemDelete";
 	deleteButton.onclick = sendDelete.bind(item._id);
+
+	var editButton = document.createElement("input");
+	editButton.type = "button";
+	editButton.value = "Edit This Item";
+	editButton.className = "itemEdit";
+	editButton.onclick = showEdit.bind(item);//{'id': item._id, 'title': item.title, 'faculty': item.faculty, 'courseNum': item.courseNum});
 
 	container.appendChild(title);
 	container.appendChild(date);
-	container.appendChild(course);
+	container.appendChild(faculty);
+	container.appendChild(courseNum);
 	container.appendChild(deleteButton);
+	container.appendChild(editButton);
 
 	itemDiv.appendChild(container);
 }
@@ -85,7 +98,7 @@ function sendDelete() {
 	});
 
 	request.done(function(response, textStatus, jqXHR) {
-		showPopup();
+		showPopup('Deleted Successfully!');
 		$("#"+this.toString()).remove();
 	}.bind(this));
 
@@ -109,6 +122,89 @@ function convertUNIXtoDateString(timestamp) {
 	return month+' '+day+', '+year+' '+hours+ ':' +minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function showPopup() {
-	$('<div>Deleted Successfully!</div>').insertBefore('#info').delay(3000).fadeOut();
+function showPopup(msg) {
+	$('<div>'+msg+'</div>').insertBefore('#info').delay(3000).fadeOut();
+}
+
+
+function showEdit()
+{
+    var currItem = document.getElementById(this._id);
+    var id = this._id.toString();
+
+	var newTitle = document.createElement("input");
+    newTitle.className = 'itemTitle';
+    newTitle.id = 'itemTitle_'+id;
+	newTitle.type = "text";
+   	newTitle.name= 'title';
+    newTitle.value= this.title;
+
+    var newFaculty = document.createElement("input");
+    newFaculty.className = 'itemFaculty';
+    newFaculty.id = 'itemFaculty_'+id;
+	newFaculty.type = "text";
+   	newFaculty.name= 'faculty';
+    newFaculty.value= this.faculty;
+    newFaculty.pattern = "[A-Za-z]{2,}";
+
+	var newCourseNum = document.createElement("input");
+    newCourseNum.className = 'itemCourseNum';
+    newCourseNum.id = 'itemCourseNum_'+id;
+	newCourseNum.type = "text";
+   	newCourseNum.name= 'courseNum';
+    newCourseNum.value= this.courseNum;
+    newCourseNum.pattern= "[0-9]{3}";
+
+    $("#"+id+" .itemTitle").replaceWith(newTitle);
+    $("#"+id+" .itemFaculty").replaceWith(newFaculty);
+    $("#"+id+" .itemCourseNum").replaceWith(newCourseNum);
+
+
+    var saveButton = document.createElement("input");
+	saveButton.type = "button";
+	saveButton.value = "Save Changes";
+	item = $(this);
+	saveButton.onclick = sendEdit.bind(this._id);
+	
+	$("#"+id+" .itemEdit").replaceWith(saveButton);
+
+}
+
+function sendEdit()
+{
+	var item = document.getElementById(this);
+	var id = this.toString();
+	var title = document.getElementById('itemTitle_'+id);
+	var faculty = document.getElementById('itemFaculty_'+id);
+	var courseNum = document.getElementById('itemCourseNum_'+id);
+	var infoSection = document.getElementById("info");
+
+	//var er = "saving Changes for title: "+ title.value;
+	//window.alert(er);
+
+	if (request) {
+		request.abort();
+	}
+
+	request = $.ajax({
+		url: "/index.php/Item/editItem",
+		type: "post",
+		data: {
+			id: id,
+			title: title.value,
+			faculty:faculty.value,
+			courseNum: courseNum.value
+		}
+	});
+
+	request.done(function(response, textStatus, jqXHR) {
+		showPopup("Item edited Successfully");
+		location.reload();
+
+	});
+
+	request.fail(function(jqXHR, textStatus, errorThrown) {
+		infoSection.innerHTML = errorThrown;
+	});
+
 }

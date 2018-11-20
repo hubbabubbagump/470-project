@@ -55,10 +55,17 @@
                 ,$sellerEmail);
     	}
 
-    	public function getAllItems()
-    	{
-
-    	}
+        public function editItem() 
+        {
+            $database = new MongoDB\Client(getDBAddr());
+            return editExistingItem(
+                $database->local->saleItems,
+                $_POST['id'],
+                $_POST['title'],
+                $_POST['faculty'],
+                $_POST['courseNum']
+            );
+        }
     }
 
 ?>

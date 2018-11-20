@@ -66,6 +66,22 @@
 			echo $this->remove($_POST['id']);
 		}
 
+		public function showEditForm() 
+		{
+			$data['id'] = $_POST['id'];
+			$data['title'] = $_POST['title'];
+			$data['faculty'] = $_POST['faculty'];
+			$data['courseNum'] = $_POST['courseNum'];
+
+			$this->load->view('header', $this->headerData);
+			$this->load->view('edit_item_page', $data);
+		}
+
+		public function editItem()
+		{
+			echo $this->edit();
+		}
+
 		// returns a JSON string
 		private function getItemsOwnedByCurrentUser()
 		{
@@ -86,6 +102,21 @@
 				header('HTTP/2 <enter code> Invalid Item');
 				die(json_encode(array('message' => 'Invalid Item')));
 			}
+		}
+
+		private function edit()
+		{
+			$success = $this->item_model->editItem();
+			if ($success)
+			{
+				echo "HTTP/2 201";
+			}
+			else
+			{
+				header('HTTP/2 <enter code> Invalid Item');
+				die(json_encode(array('message' => 'Invalid Item')));
+			}
+
 		}
 
 

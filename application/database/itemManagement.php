@@ -187,4 +187,29 @@
             return false;
         }
     }
+
+    function editExistingItem($collection, $id, $title, $faculty, $courseNum)
+    {
+        
+        $updateResult = $collection->updateOne(
+            ['_id' => $id],
+            ['$set' =>
+                [   'title' => $title,
+                    'faculty' => $faculty,
+                    'courseNum' => $courseNum
+                ]
+            ]
+        );
+
+        //echo "Matched ".$updateResult->getMatchedCount()." document(s)\n";
+        //echo "Modified ".$updateResult->getModifiedCount()." document(s)\n";
+        if ($updateResult->getModifiedCount() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 ?>
