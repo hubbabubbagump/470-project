@@ -21,5 +21,5 @@ function openPostItem() {
 }
 
 function openMessages() {
-    window.location.href = "/Message"
-}
+    window.location.href = "/Message";
+}   
