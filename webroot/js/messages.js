@@ -91,8 +91,11 @@ function sendMessage() {
             recipient: targetEmail,
             body: message
         }
-    });
+	});
+	
+	getMessages(targetEmail);
 
+	document.getElementById("textarea").value = "";
     //console.log(recieverEmail);
 }
 
