@@ -52,6 +52,8 @@ function getItems() {
         data: {search: text, page: page}
     });
 
+    debugger;
+
     searchRequest.done(function (response, textStatus, jqXHR) {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
@@ -404,6 +406,7 @@ function openMessageModal(email, id) {
     if (id != currentId) {
         document.getElementById("textarea").value = "";
     }
+
     currentEmail = email;
     currentId = id;
     var msgModal = document.getElementById("msgModal");
@@ -411,6 +414,16 @@ function openMessageModal(email, id) {
 }
 
 function sendMessage() {
-    var email = currentEmail;
-    console.log(email);
+    var message = document.getElementById("textarea").value;
+
+    messageSendRequest = $.ajax({
+        url: "/index.php/message/send",
+        type: "post",
+        data: {
+            recipient: currentEmail,
+            body: message
+        }
+    });
+
+    //console.log(recieverEmail);
 }

@@ -15,13 +15,18 @@
     //Collection for messages sent between users
     $local->createCollection("messages");
     $messages = $local->messages;
-    echo "[" . $local->getDatabaseName() . "] Created new collection: " . $saleItems->getCollectionName() . "\n";
+    echo "[" . $local->getDatabaseName() . "] Created new collection: " . $messages->getCollectionName() . "\n";
 
     //Sample message
-    sendMessage($messages, "StudentA", "StudentB", "[Generic Greeting]");
-    sendMessage($messages, "StudentA", "StudentB", "[Generic Follow-up]");
-    sendMessage($messages, "StudentA", "StudentB", "[Agitated Follow-up]");
+    sendMessage($messages, "StudentA@mail.com", "StudentB@mail.com", "[Generic Greeting]");
+    sendMessage($messages, "StudentB@mail.com", "StudentA@mail.com", "[Generic Response]");
+    sendMessage($messages, "StudentA@mail.com", "StudentB@mail.com", "[Generic Discussion]");
+    sendMessage($messages, "StudentA@mail.com", "StudentC@mail.com", "[Generic Greeting]");
+    sendMessage($messages, "StudentA@mail.com", "StudentD@mail.com", "[Generic Greeting]");
+    sendMessage($messages, "StudentE@mail.com", "StudentA@mail.com", "[Generic Response]");
 
     //Get messages sent to Student B
-    retrieveMessage($messages, "StudentB");
+    retrieveMessage($messages, "StudentB@mail.com", "StudentA@mail.com");
+
+    getParticipants($messages, "StudentA@mail.com");
 ?>
