@@ -32,22 +32,18 @@ $session_value = (isset($_SESSION['user_id']))?$_SESSION['user_id']:'';
 
 			<div id="conversationTitle"></div>
 
-			<div class="dropdown">
-  				<button class="dropbtn">Your Previous Contacts</button>
-  				<div class="dropdown-content" id="dropMenu"></div>
+			<div class="contacts">
+				<div class="contactsTitle">Contacts</div>
 			</div>
 
 			<div class="messageDisplay" id="message"></div>
 
 			<div id="newMessage" class="modal">
 				<div id="newMessageContent" class="modalContent">
-					<div id="modalHeader" class="modalHeader">
-						<p id="messageTitle">--------New Message--------</p>
-					</div>
 					<div id="messageBody" class="modalBody">
 						<textarea id="textarea" rows="10" cols="73" name="message" autofocus required></textarea>
 						<br>
-						<input id="messageButton" class="messageButton" type="submit" value="Send Message" onclick="sendMessage()"></input>
+						<input id="messageButton" class="button" type="submit" value="Send Message" onclick="sendMessage()"></input>
 					</div>
 				</div>
 			</div>

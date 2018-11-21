@@ -19,21 +19,20 @@ function getContacts() {
 			document.getElementById("test").innerHTML = "<h2>No previous messages detected<h2>";
 		} else {
 			document.getElementById("test").innerHTML = "";
-			document.getElementById("dropMenu").innerHTML = "";
             
 			for (var i = 0; i < jsonData.participants.length; i++) {
     			var contacts = jsonData.participants[i];
 				//console.log(contacts.recipientEmail);
 				
 				if (contacts.hasOwnProperty('recipientEmail')) {
-					if ($.inArray(contacts.recipientEmail, list) == -1) {
+					if ($.inArray(contacts.recipientEmail, list) == -1 && contacts.recipientEmail) {
 						list.push(contacts.recipientEmail);
-						$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.recipientEmail + "\')\" value=\" " + contacts.recipientEmail + " \">" + contacts.recipientEmail + "</a>");
+						createContactSection(contacts.recipientEmail);
 					}
 				} else {
-					if ($.inArray(contacts.senderEmail, list) == -1) {
+					if ($.inArray(contacts.senderEmail, list) == -1 && contacts.recipientEmail) {
 						list.push(contacts.senderEmail);
-						$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.senderEmail + "\')\" value=\" " + contacts.senderEmail + " \">" + contacts.senderEmail + "</a>");
+						createContactSection(contacts.senderEmail);						
 					}	
 				}
 			}
@@ -53,7 +52,7 @@ function getMessages(email) {
         url: "/index.php/message/retrieve",
         type: "get",
         data: {
-            recipient: targetEmail
+            recipient: email
         }
 	});
 
@@ -105,19 +104,23 @@ function sendMessage() {
     //console.log(recieverEmail);
 }
 
+function createContactSection(contactEmail) {
+	//$( ".dropdown-content" ).append("<a class=\"contact\" onclick=\"getMessages(\'" + contacts.senderEmail + "\')\" value=\" " + contacts.senderEmail + " \">" + contacts.senderEmail + "</a>");
+
+	var section = document.getElementsByClassName("contacts")[0];
+	
+	var contact = document.createElement("p");
+	contact.className = "contactListing";
+	contact.innerHTML = contactEmail;
+	contact.onclick = function() {
+		getMessages(this);
+	}.bind(contactEmail);
+
+	section.appendChild(contact);
+}
+
 function createMessageSection(conversation) {
 	var section = document.getElementsByClassName("messageDisplay")[0];
-
-	/*var container = document.createElement("div");
-	container.className = "msgContainer";
-
-	var sender = document.createElement("div");
-	sender.className = "msgSenderEmail";
-	sender.innerHTML = conversation.senderEmail;
-
-	var recipient = document.createElement("div");
-	recipient.className = "msgRecipientEmail";
-	recipient.innerHTML = conversation.recipientEmail;*/
 	
 	var message = document.createElement("p");
 	if (conversation.senderEmail == currentUser) {
@@ -126,10 +129,6 @@ function createMessageSection(conversation) {
 		message.className = "msgFromOther";
 	}
 	message.innerHTML = conversation.message;
-
-	/*container.appendChild(sender);
-	container.appendChild(recipient);
-	container.appendChild(message);*/
 
 	section.appendChild(message);
 }
