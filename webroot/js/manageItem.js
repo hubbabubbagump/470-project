@@ -132,11 +132,6 @@ function convertUNIXtoDateString(timestamp) {
 	return month+' '+day+', '+year+' '+hours+ ':' +minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function showPopup(msg) {
-	$('<div>'+msg+'</div>').insertBefore('#info').delay(3000).fadeOut();
-}
-
-
 function showEdit()
 {
     var currItem = document.getElementById(this._id);

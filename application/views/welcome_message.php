@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="/css/header.css">
 	<link rel="stylesheet" href="/css/welcome.css">
 	<link rel="stylesheet" href="/css/loading.css">
+	<link rel="stylesheet" href="/css/popup.css">
 
 	<script type='text/javascript' src="/js/header.js"></script>
 	<!-- Leaflet -->
@@ -79,6 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	<script src="/js/jquery-3.3.1.min.js"></script>
     <script type='text/javascript' src="/js/welcome.js"></script>
+    <script type='text/javascript' src="/js/popup.js"></script>
 
 </body>
 </html>

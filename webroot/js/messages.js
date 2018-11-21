@@ -30,7 +30,7 @@ function getContacts() {
 						createContactSection(contacts.recipientEmail);
 					}
 				} else {
-					if ($.inArray(contacts.senderEmail, list) == -1 && contacts.recipientEmail) {
+					if ($.inArray(contacts.senderEmail, list) == -1 && contacts.senderEmail) {
 						list.push(contacts.senderEmail);
 						createContactSection(contacts.senderEmail);						
 					}	

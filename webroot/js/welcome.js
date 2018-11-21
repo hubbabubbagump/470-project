@@ -425,5 +425,17 @@ function sendMessage() {
         }
     });
 
+    messageSendRequest.done(function(response, textStatus, jqXHR) {
+        var message = document.getElementById("textarea");
+        message.value = "";
+        var msgModal = document.getElementById("msgModal");
+        msgModal.style.display = "none";
+        showPopup("Message Sent!")
+    });
+
+    messageSendRequest.fail(function(jqXHR, textStatus, errorThrown) {
+
+    });
+
     //console.log(recieverEmail);
 }
