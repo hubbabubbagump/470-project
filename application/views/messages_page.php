@@ -23,7 +23,7 @@ $session_value = (isset($_SESSION['user_id']))?$_SESSION['user_id']:'';
 		</script>
 	</head>
 	
-	<body class="loginContainer" onload="getContacts()">
+	<body onload="getContacts()">
 
   		<h1>Messages</h1>
   		<div class="messagesBody">
