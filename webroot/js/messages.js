@@ -60,15 +60,23 @@ function getMessages(email) {
 	conversation.done(function(response, textStatus, jqXHR) {
 		var jsonData = convertRawResponse(response);
 		document.getElementById("message").innerHTML = "";
+		if (jsonData.conversation) {
+			if (jsonData.conversation[0].recipientEmail == currentUser) {
+				document.getElementById("conversationTitle").innerHTML = jsonData.conversation[0].senderEmail;
+			} else {
+				document.getElementById("conversationTitle").innerHTML = jsonData.conversation[0].recipientEmail;
+			}
+		} else {
+			document.getElementById("conversationTitle").innerHTML = "";
+		}
 
 		for (var i = 0; i < jsonData.conversation.length; i++) {
 			var conversations = jsonData.conversation[i];
 			
-			$( ".messageDisplay" ).append("<h3>From: " + conversations.senderEmail + "\n<h3>");
-			$( ".messageDisplay" ).append("<h3>To: " + conversations.recipientEmail + "\n<h3>");
-			$( ".messageDisplay" ).append("Message: " + conversations.message + "\n");
-			$( ".messageDisplay" ).append("\n");
+			createMessageSection(conversations);
 		}
+
+		$(".messageDisplay").scrollTop($(".messageDisplay")[0].scrollHeight);
     });
     
     conversation.fail( function(jqXHR, textStatus, errorThrown) {
@@ -95,6 +103,35 @@ function sendMessage() {
 
 	document.getElementById("textarea").value = "";
     //console.log(recieverEmail);
+}
+
+function createMessageSection(conversation) {
+	var section = document.getElementsByClassName("messageDisplay")[0];
+
+	/*var container = document.createElement("div");
+	container.className = "msgContainer";
+
+	var sender = document.createElement("div");
+	sender.className = "msgSenderEmail";
+	sender.innerHTML = conversation.senderEmail;
+
+	var recipient = document.createElement("div");
+	recipient.className = "msgRecipientEmail";
+	recipient.innerHTML = conversation.recipientEmail;*/
+	
+	var message = document.createElement("p");
+	if (conversation.senderEmail == currentUser) {
+		message.className = "msgFromYou";
+	} else {
+		message.className = "msgFromOther";
+	}
+	message.innerHTML = conversation.message;
+
+	/*container.appendChild(sender);
+	container.appendChild(recipient);
+	container.appendChild(message);*/
+
+	section.appendChild(message);
 }
 
 function convertRawResponse(response) {

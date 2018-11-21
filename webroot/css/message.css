@@ -1,3 +1,11 @@
+#conversationTitle {
+    float: left;
+    font-size: 26px;
+    margin: 5px;
+    height: 40px;
+    font-weight: bold;
+}
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #A6192E;
@@ -10,7 +18,7 @@
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
-    display: inline-block;
+    margin-left: calc(50% - 20px);
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -29,6 +37,53 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+
+.messagesBody {
+    width: 100%;
+}
+
+.messageDisplay {
+    width: calc(50% - 20px);
+    float: left;
+    overflow-y: scroll;
+    max-height: 250px;
+    margin-right: 20px;
+}
+
+.msgContainer {
+    margin: 5px;
+}
+
+.msgContainer * {
+    margin: 5px;
+}
+
+.msgFromYou {
+    margin: 10px 5px;
+    padding: 10px;
+    background-color: #87CEFA;
+    border-radius: 10px;
+    text-align: right;
+    box-shadow: 1px 1px 2px #1E90FF;
+}
+
+.msgFromOther {
+    margin: 10px 5px;
+    padding: 10px;
+    background-color: #DCDCDC;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px #696969;
+}
+
+#messageTitle {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#newMessage {
+    margin-left: calc(50% - 20px);
+    height: 250px;
 }
 
 /* Change color of dropdown links on hover */
