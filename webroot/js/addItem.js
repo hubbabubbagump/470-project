@@ -80,7 +80,8 @@ var imageUrls = [];
 cloudinary.applyUploadWidget('#imageWidget', {
 		cloudName: 'dkgnnu4oh', 
 		uploadPreset: 'preset1', 
-		sources: ['local']
+		sources: ['local'],
+		buttonClass: 'imageButton'
 	},
 	(error, result) => {
 		if (result && result.event === "success") {
