@@ -105,3 +105,22 @@ h1 {
 body {
     background-color: #54585A;
 }
+
+.imageButton {
+    background-color: #A6192E;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0px #777;
+}
+
+.imageButton:hover {
+    opacity: .8;
+}

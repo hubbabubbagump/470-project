@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 			<label><b>Description</b></label><br/>
 			<input type="textbox" name="desc" placeholder="Description" value="<?php echo set_value('desc'); ?>"/><br/>
 
-			<div id="imageWidget">Upload image</div>
+			<div id="imageWidget" class="imageButton">Upload image</div>
 
 			<div id="addItemMap"></div>
 
