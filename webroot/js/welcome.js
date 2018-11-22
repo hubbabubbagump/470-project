@@ -52,8 +52,6 @@ function getItems() {
         data: {search: text, page: page}
     });
 
-    debugger;
-
     searchRequest.done(function (response, textStatus, jqXHR) {
         var jsonResponse = JSON.parse(response);
         var results = jsonResponse.results;
