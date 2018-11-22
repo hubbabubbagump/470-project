@@ -1,6 +1,10 @@
 var request;
 
 $(document).ready(function() {
+	if (sessionStorage.getItem("editItemPopup")) {
+		showPopup('Item Edited!');
+		sessionStorage.removeItem("editItemPopup");
+	}
 	getItems();
 });
 
@@ -108,7 +112,7 @@ function sendDelete() {
 	});
 
 	request.done(function(response, textStatus, jqXHR) {
-		showPopup('Deleted Successfully!');
+		showPopup('Item Deleted!');
 		$("#"+this.toString()).remove();
 	}.bind(this));
 
@@ -129,7 +133,7 @@ function convertUNIXtoDateString(timestamp) {
 	var minutes = "0" + date.getMinutes();
 	var seconds = "0" + date.getSeconds();
 
-	return month+' '+day+', '+year+' '+hours+ ':' +minutes.substr(-2) + ':' + seconds.substr(-2);
+	return month+' '+day+', '+year+' '+hours+ ':' +minutes.substr(-2);// + ':' + seconds.substr(-2);
 }
 
 function showEdit()
@@ -237,8 +241,8 @@ function sendEdit()
 	});
 
 	request.done(function(response, textStatus, jqXHR) {
+		sessionStorage.setItem("editItemPopup", true);
 		location.reload();
-		showPopup('Item Edited Successfully');
 	});
 
 	request.fail(function(jqXHR, textStatus, errorThrown) {

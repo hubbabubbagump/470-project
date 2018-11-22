@@ -31,7 +31,8 @@
     font-weight: 550;
     font-size: 15px;
     margin-right: 3px;
-    float: left
+    float: left;
+    line-height: 18px;
 }
 
 .itemCourseNum {
@@ -39,12 +40,13 @@
     font-weight: 550;
     font-size: 15px;
     clear: right;
-
+    line-height: 18px;
 }
 
 .itemPrice {
     font-size: 15px;
     color: #54585A;
+    line-height: 18px;
 }
 
 .itemDesc {

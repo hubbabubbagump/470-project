@@ -4,6 +4,10 @@ var leafletMap;
 var leaftletMarker;
 
 $(document).ready(function() {
+	if (sessionStorage.getItem("addItemPopup")) {
+		showPopup("Item Posted!");
+		sessionStorage.removeItem("addItemPopup");
+	}
     leafletMap = L.map('addItemMap').setView([49.276184, -122.918719], 13);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGp0dW5nIiwiYSI6ImNqb2diY3U0NDA3N2UzcG1nejZmcnBnemMifQ.pvJl8iZLM--Cf2NqKNAVzA', 
@@ -60,7 +64,7 @@ function addItem() {
 	});
 
 	request.done(function (response){
-		alert("Item created")
+		sessionStorage.setItem("addItemPopup", true);
 		location.reload();
 	});
 

@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="/css/login.css">
         <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/popup.css">
 
         <!-- Leaflet -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
@@ -53,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?><!DOCTYPE html>
 	<script src="/js/jquery-3.3.1.min.js"></script>
     <script type='text/javascript' src="/js/addItem.js"></script>
     <script type='text/javascript' src="/js/header.js"></script>
+    <script type='text/javascript' src="/js/popup.js"></script>
 	</body>
 
 </html>
