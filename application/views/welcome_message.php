@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="loaderDiv"></div>
 					<p id="searchText" class="searchText">Search</p>
 				</div>
-				<span class="sTerm"><input id="searchBox" type="text" class="searchTerm" placeHolder="Search..."/></span>
+				<span class="sTerm"><input id="searchBox" type="text" class="searchTerm" placeHolder="Search by name, faculty, course number..."/></span>
 			</div>
 		</div>
 		<div id="loader">
