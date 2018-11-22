@@ -124,13 +124,55 @@ function createMessageSection(conversation) {
 	
 	var message = document.createElement("p");
 	if (conversation.senderEmail == currentUser) {
-		message.className = "msgFromYou";
-	} else {
-		message.className = "msgFromOther";
+			message.className = "msgFromYou";
+	}
+	else {
+		if (conversation.readStatus == false) {
+			message.className = "msgFromOther";
+			message.style.fontWeight = 'bold';
+			message.style['background-color'] = '#e3e3e3';
+			message.id = conversation._id;
+			message.onmouseover = setReadStatus.bind(conversation._id);
+		}
+		else {
+			message.className = "msgFromOther";
+		}
 	}
 	message.innerHTML = conversation.message;
 
 	section.appendChild(message);
+}
+
+var setReadRequest;
+
+function setReadStatus() {
+	//send ajax call to set read 
+	var message = document.getElementById(this.toString());
+	
+	if (message != undefined) {
+		
+		if (setReadRequest) {
+		setReadRequest.abort();
+		}
+
+		setReadRequest = $.ajax({
+			url: "/index.php/message/markRead",
+			type: "post",
+			data: {
+				id: this.toString()
+			}
+		});
+
+		setReadRequest.done(function(response) {
+			message.style.fontWeight = 'normal';
+			message.style['background-color'] = '#DCDCDC';
+			message.id = message.id+'-';
+		});
+
+		setReadRequest.fail(function(jqXHR, textStatus, errorThrown) {
+			window.alert(errorThrown);
+		});
+	}
 }
 
 function convertRawResponse(response) {

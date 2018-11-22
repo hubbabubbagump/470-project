@@ -44,6 +44,15 @@
                 $senderEmail
 			);
 		}
+
+        public function setReadStatus() 
+        {
+            $database = new MongoDB\Client(getDBAddr());
+            return updateMessageStatus(
+                $database->local->messages,
+                $_POST['id'],
+                true);
+        }
     }
 
 ?>

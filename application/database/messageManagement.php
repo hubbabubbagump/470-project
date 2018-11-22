@@ -7,11 +7,14 @@
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
         $id = uniqid();
+        $readStatus = false;
         $result = $collection->insertOne([
             'senderEmail' => $senderEmail,
             'recipientEmail' => $recipientEmail,
             'message' => $message,
             'dateSent' => $timestamp,
+            'readStatus' => $readStatus,
+            '_id' => $id
         ]);
         
         echo "[" . $collection->getCollectionName() . "] Sent new message from: {" . $senderEmail . "} to: {" . $recipientEmail . "}\n"; 
@@ -88,5 +91,19 @@
         };
 
         return json_encode(array('participants' => $participants));
+    }
+
+    function updateMessageStatus($collection, $id, $status) 
+    {
+        $updateResult = $collection->updateOne(
+            ['_id' => $id],
+            ['$set' => ['readStatus' => $status]]);
+
+        if ($updateResult->getMatchedCount() == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 ?>

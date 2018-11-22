@@ -50,5 +50,11 @@
 			$participants = $this->message_model->get($senderEmail); 
 			echo $participants;
 		}
+
+		public function markRead()
+		{
+			$success = $this->message_model->setReadStatus();
+			echo $success;
+		}
 	}
 ?>
