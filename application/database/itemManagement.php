@@ -40,8 +40,10 @@
         $moreItems = true;
 
         $isLoggedIn = false;
+        $userId = null;
         if (isset($_SESSION['user_id'])) {
             $isLoggedIn = true;
+            $userId = $_SESSION['user_id'];
         }
 
         $showEmail = ($isLoggedIn) ? 1 : 0;
@@ -95,7 +97,7 @@
             $i += 1;
          }
 
-        return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
+        return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn, 'currentUser' => $userId));
     }
 
     function getNewestItems($collection, $page) {
@@ -105,8 +107,11 @@
         $moreItems = true;
 
         $isLoggedIn = false;
+        $userId = null;
+
         if (isset($_SESSION['user_id'])) {
             $isLoggedIn = true;
+            $userId = $_SESSION['user_id'];
         }
 
         $showEmail = ($isLoggedIn) ? 1 : 0;
@@ -151,7 +156,7 @@
             $i += 1;
          };
 
-         return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn));
+         return json_encode(array('results' => $results, 'moreItems' => $moreItems, 'isAuthenticated' => $isLoggedIn, 'currentUser' => $userId));
     }
 
     function getItemsBySellerEmail($collection, $sellerEmail)

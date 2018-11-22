@@ -59,6 +59,7 @@ function getItems() {
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
         var loggedIn = jsonResponse.isAuthenticated;
+        var currUser = jsonResponse.currentUser;
 
         var container = document.getElementById("itemList");
         while (container.firstChild) {
@@ -79,7 +80,7 @@ function getItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor, loggedIn);
+                    renderItem(item, container, bColor, loggedIn, currUser);
                 }
             }
             
@@ -128,6 +129,7 @@ function getMore() {
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
         var loggedIn = jsonResponse.isAuthenticated;
+        var currUser = jsonResponse.currentUser;
 
         var container = document.getElementById("itemList");
 
@@ -139,7 +141,7 @@ function getMore() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor, loggedIn);
+                    renderItem(item, container, bColor, loggedIn, currUser);
                 }
             }
             
@@ -182,6 +184,7 @@ function getNewItems() {
         var results = jsonResponse.results;
         var moreItems = jsonResponse.moreItems;
         var loggedIn = jsonResponse.isAuthenticated;
+        var currUser = jsonResponse.currentUser;
 
         var container = document.getElementById("itemList");
 
@@ -201,7 +204,7 @@ function getNewItems() {
                 if (results.hasOwnProperty(i)) {
                     let item = results[i];
                     var bColor = (((i % 2) == 0) ? "#FFF" : "#F5F5F5");
-                    renderItem(item, container, bColor, loggedIn);
+                    renderItem(item, container, bColor, loggedIn, currUser);
                 }
             }
             
@@ -226,13 +229,14 @@ function getNewItems() {
     })
 }
 
-function renderItem(item, container, bColor, loggedIn) {
+function renderItem(item, container, bColor, loggedIn, currUser) {
     var div = document.createElement("div");
     div.style.backgroundColor = bColor;
     div.className = "itemBox";
     div.id = item._id;
+    var createMsgBox = (loggedIn && (currUser != item.sellerEmail));
 
-    if (loggedIn) {
+    if (createMsgBox) {
         var msgBox = document.createElement("div");
         msgBox.className = "msgBox";
         msgBox.innerText = "Message";
@@ -254,7 +258,7 @@ function renderItem(item, container, bColor, loggedIn) {
     description.innerText = item.desc;
     description.className = "desc";
 
-    if (loggedIn) {
+    if (createMsgBox) {
         div.appendChild(msgBox);
     }
     div.appendChild(title);
@@ -266,7 +270,7 @@ function renderItem(item, container, bColor, loggedIn) {
         openModal(item._id);
     });
 
-    if (loggedIn) {
+    if (createMsgBox) {
         msgBox.addEventListener("click", function() {
             openMessageModal(item.sellerEmail, item._id);
         });
