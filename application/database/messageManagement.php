@@ -54,6 +54,7 @@
 
         foreach ($cursor as $message) {
             array_push($conversation, $message);
+
         }
 
         return json_encode(array('conversation' => $conversation));
@@ -74,20 +75,19 @@
 
         $cursor1 = $collection->find($query1, $projection1);
         $cursor2 = $collection->find($query2, $projection2);
-        /*foreach ($cursor1 as $doc1) {
-            print_r($doc1);
-        }*/
 
         $participants = array();
 
         $cursor1 = $cursor1->toArray(); 
         foreach ($cursor1 as $contact) {
-            array_push($participants, $contact);
+            $count = getUnreadCount($collection, $senderEmail, $contact['recipientEmail']);
+            array_push($participants, array('contact' => $contact, 'unread' => $count));
         };
 
         $cursor2 = $cursor2->toArray();
         foreach ($cursor2 as $contact) {
-            array_push($participants, $contact);
+            $count = getUnreadCount($collection, $contact['senderEmail'], $senderEmail);
+            array_push($participants, array('contact' => $contact, 'unread' => $count));     
         };
 
         return json_encode(array('participants' => $participants));
@@ -101,9 +101,47 @@
 
         if ($updateResult->getMatchedCount() == 0) {
             return false;
-        }
+        }   
         else {
             return true;
         }
     }
+
+    function getUnreadCount($collection, $senderEmail, $recipientEmail)
+    {
+        /*$count = $collection->count(
+           [
+            'senderEmail' => $senderEmail,
+            'recipientEmail' => $recipientEmail,
+            'readStatus' => false 
+           ]);
+        return $count;*/
+        /*$cursor = $collection->aggregate(
+            [
+           ['$match'=>[
+            'senderEmail' => $senderEmail,
+            'recipientEmail' => $recipientEmail,
+            'readStatus' => false 
+           ]],
+           [
+            '$group' => []
+           ]
+          ]);//.count();
+        //return $cursor;//.count();
+        return count(iterator_to_array($cursor));*/
+        $cursor = $collection->aggregate(
+
+        array(array('$match'=> array('senderEmail' => $senderEmail,
+                'recipientEmail'=>$recipientEmail,
+                'readStatus' => false))
+            , array('$group' =>   array(
+                'senderEmail' => $senderEmail,
+                'recipientEmail'=>$recipientEmail,
+                'readStatus' => false,
+                'count'=> array('$sum'=>1)))));
+            //new MongoCode('function(doc, prev) {prev.count+=1}'));
+        return $cursor;//['count'];
+    }
+
+
 ?>

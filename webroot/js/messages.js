@@ -4,6 +4,8 @@ var participants;
 var conversation;
 var targetEmail;
 
+var unreadCount = {}; // count of unread messages by participant
+
 function getContacts() {
 	var list = [];
 
@@ -21,18 +23,25 @@ function getContacts() {
 			document.getElementById("test").innerHTML = "";
             
 			for (var i = 0; i < jsonData.participants.length; i++) {
-    			var contacts = jsonData.participants[i];
+    			var contacts = jsonData.participants[i].contact;
+    			//var contacts = contactInfo.contact;
+    			var ncount = jsonData.participants[i].unread;
+
+    			//window.alert('contact: '+contacts+"\ncount= "+count);
 				//console.log(contacts.recipientEmail);
-				
+				window.alert('unread messages count= '+ncount);
+
 				if (contacts.hasOwnProperty('recipientEmail')) {
 					if ($.inArray(contacts.recipientEmail, list) == -1 && contacts.recipientEmail) {
 						list.push(contacts.recipientEmail);
+						unreadCount[contacts.recipientEmail] = ncount;
 						createContactSection(contacts.recipientEmail);
 					}
 				} else {
 					if ($.inArray(contacts.senderEmail, list) == -1 && contacts.senderEmail) {
 						list.push(contacts.senderEmail);
-						createContactSection(contacts.senderEmail);						
+						unreadCount[contacts.senderEmail] = ncount;
+						createContactSection(contacts.senderEmail);					
 					}	
 				}
 			}
@@ -111,10 +120,23 @@ function createContactSection(contactEmail) {
 	
 	var contact = document.createElement("p");
 	contact.className = "contactListing";
-	contact.innerHTML = contactEmail;
 	contact.onclick = function() {
 		getMessages(this);
 	}.bind(contactEmail);
+
+	var num;
+
+	window.alert('in createContactSection. unreadCount= '+unreadCount[contactEmail]);
+	if (unreadCount[contactEmail] > 0) {
+		/*var num = document.createElement("div");
+		num.className = "contactListing";
+		num.innerHTML = unreadCount[contactEmail];
+		contact.appendChild(num);*/
+		contact.innerHTML = contactEmail+" - "+unreadCount[contactEmail]+" unread messages";
+	}
+	else {
+		contact.innerHTML = contactEmail;
+	}
 
 	section.appendChild(contact);
 }
@@ -132,7 +154,7 @@ function createMessageSection(conversation) {
 			message.style.fontWeight = 'bold';
 			message.style['background-color'] = '#e3e3e3';
 			message.id = conversation._id;
-			message.onmouseover = setReadStatus.bind(conversation._id);
+			message.onmouseover = setReadStatus.bind(conversation);
 		}
 		else {
 			message.className = "msgFromOther";
@@ -147,7 +169,7 @@ var setReadRequest;
 
 function setReadStatus() {
 	//send ajax call to set read 
-	var message = document.getElementById(this.toString());
+	var message = document.getElementById(this._id.toString());
 	
 	if (message != undefined) {
 		
@@ -159,14 +181,23 @@ function setReadStatus() {
 			url: "/index.php/message/markRead",
 			type: "post",
 			data: {
-				id: this.toString()
+				id: this._id.toString()
 			}
 		});
 
 		setReadRequest.done(function(response) {
 			message.style.fontWeight = 'normal';
 			message.style['background-color'] = '#DCDCDC';
+			
+
+			var senderEmail = this.senderEmail;
+			if (unreadCount[senderEmail] > 0) {
+				unreadCount[senderEmail] -= 1;
+			}
+
 			message.id = message.id+'-';
+
+
 		});
 
 		setReadRequest.fail(function(jqXHR, textStatus, errorThrown) {
