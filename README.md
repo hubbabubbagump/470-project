@@ -1,6 +1,7 @@
 # 470-project
 
 A web application designed to facilitate the trading of school materials such as textbooks.
+Created by: Matthew Sy de jesus, Jonathan Tung, Avneet Kaur, Victor Yuan, Ethan Jung
 
 TO RUN:
 1. Complete Setup
